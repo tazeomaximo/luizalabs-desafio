@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+
+    database:
+        image: mysql:5.7
+        container_name: mysql-desafio
+        ports:
+            - "3306:3036"
+        environment:
+            MYSQL_ROOT_PASSWORD: rootdesafio
+            MYSQL_DATABASE: desafio-luizalabs
+            MYSQL_USER: desafio
+            MYSQL_PASSWORD: desafio
+        volumes:
+        - ./db:/docker-entrypoint-initdb.d
