@@ -1,23 +1,18 @@
 package br.com.luizalabs.desafio.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(content = Include.NON_NULL)
 @ApiModel("Produto")
 @JsonPropertyOrder(value = { "id", "titulo","image", "preco", "review" })
 public class ProdutoDto {
 
-	@ApiParam(type = "long", name = "id", example = "Identificador do Produto")
+	@ApiParam(type = "string", name = "id", example = "Identificador do Produto")
 	@JsonProperty("id")
-	private Long id;
+	private String id;
 
 	@ApiParam(type = "string", name = "titulo", example = "Nome do produto")
 	@JsonProperty("titulo")
@@ -35,11 +30,11 @@ public class ProdutoDto {
 	@JsonProperty("review")
 	private Double reviewScore;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

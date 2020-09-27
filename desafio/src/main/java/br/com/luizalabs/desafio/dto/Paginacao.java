@@ -1,16 +1,11 @@
 package br.com.luizalabs.desafio.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModel;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(content = Include.NON_NULL)
-@ApiModel("paginacao")
+@ApiModel("Paginacao")
 @JsonPropertyOrder(value = { "page_number", "page_size" })
 public class Paginacao {
 

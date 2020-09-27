@@ -2,9 +2,26 @@ package br.com.luizalabs.desafio.dto;
 
 import java.util.List;
 
-public class ClientePaginacao extends Paginacao {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModel;
+
+@ApiModel("ClientePaginacao")
+public class ClientePaginacao {
 	
+	@JsonProperty("meta")
+	private Paginacao meta;
+	
+	@JsonProperty("clientes")
 	private List<ClienteDto> clientes;
+
+	public Paginacao getMeta() {
+		return meta;
+	}
+
+	public void setMeta(Paginacao meta) {
+		this.meta = meta;
+	}
 
 	public List<ClienteDto> getClientes() {
 		return clientes;

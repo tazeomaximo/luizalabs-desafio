@@ -14,7 +14,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class DesafioConfiguration {
 	
 	ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("API Produtos Favoritos por Clientes")
+		return new ApiInfoBuilder().title("API Clientes - Produtos Favoritos")
 		    .description("Essa API serve para cadastrar cliente e seus produtos favoritos")
 		    .termsOfServiceUrl("")
 		    .version("v1.0")

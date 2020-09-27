@@ -1,16 +1,11 @@
 package br.com.luizalabs.desafio.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(content = Include.NON_NULL)
 @ApiModel("Mensagem")
 @JsonPropertyOrder(value = { "codigo", "mensagem"})
 public class MensagemDto {
