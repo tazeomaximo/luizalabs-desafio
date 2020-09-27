@@ -14,6 +14,15 @@ public class Paginacao {
 
 	@JsonProperty("page_size")
 	private Integer pagerSize;
+	
+	public Paginacao() {
+	}
+	
+	public Paginacao(Integer page, Integer size) {
+		this.pageNumber = page;
+		this.pagerSize = size;
+	}
+
 
 	public Integer getPageNumber() {
 		return pageNumber;

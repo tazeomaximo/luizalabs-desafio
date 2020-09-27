@@ -3,8 +3,11 @@ package br.com.luizalabs.desafio.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,7 @@ import br.com.luizalabs.desafio.dto.ClientePaginacao;
 import br.com.luizalabs.desafio.dto.MensagemDto;
 import br.com.luizalabs.desafio.dto.Paginacao;
 import br.com.luizalabs.desafio.dto.ProdutoDto;
+import br.com.luizalabs.desafio.service.ClienteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -35,6 +39,9 @@ public class ClienteController {
 	private static final Logger LOG = LoggerFactory.getLogger(ClienteController.class);
 
 	private static final int BAD_REQUEST = 400;
+	
+	@Autowired
+	private ClienteService clienteService;
 
 	@ApiOperation(value = "Incluir Cliente", nickname = "incluirCliente", notes = "Nesse método é possível incluir o cliente"
 			+ "<br> Use o <b>e-mail</b> como a chave de busca, ele é unico em nossa base de dados."
@@ -56,10 +63,10 @@ public class ClienteController {
 			, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{e-mail}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.PUT)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void atualizarCliente(
-			@ApiParam(value = "Identificador do cliente", example = "gutodarbem@gmail.com", type = "string", name = "e-mail") 
+			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
 			@PathVariable(name = "e-mail", required = true) final String email,
 			@ApiParam(value = "Dados do Cliente", required = true) 
 			@RequestBody(required = true) final ClienteDto cliente) {
@@ -82,53 +89,23 @@ public class ClienteController {
 			@ApiParam(value = "Tamanho da página", required = false, allowEmptyValue = true, example = "100", type = "int", name = "size")
 			@RequestParam(required = false, name = "size", defaultValue = "100") final Integer size) {
 
-		List<ClienteDto> clientes = new ArrayList<ClienteDto>();
-		ClientePaginacao cp = new ClientePaginacao();
-
-		for (Long j = 0L; j < 100; j++) {
-
-			ClienteDto cliente = new ClienteDto();
-			cliente.setEmail("teste@gmail.com " + j);
-			cliente.setNome("Guto Darbem " + j);
-
-			List<ProdutoDto> produtos = new ArrayList<ProdutoDto>();
-
-			for (Long i = 0L; i <= j; i++) {
-				ProdutoDto produto = new ProdutoDto();
-
-				produto.setId(i.toString());
-				produto.setImagem("URL_IMAGEM");
-				produto.setPreco(1.6 + i);
-				produto.setReviewScore(12.5 + i);
-				produto.setTitulo("Titulo: " + i);
-
-				produtos.add(produto);
-			}
-
-			//cliente.setProdutos(produtos);
-			clientes.add(cliente);
-		}
-
-		Paginacao p = new Paginacao();
-		p.setPageNumber(1);
-		p.setPagerSize(10);
-
-		cp.setMeta(p);
-		cp.setClientes(clientes);
-
-		LOG.info("Pagina: {}, Tamanho: {}", page, size);
-
-		return new ResponseEntity<ClientePaginacao>(cp, HttpStatus.OK);
+		
+		ClientePaginacao clientePaginacao = clienteService.findAll(page, size);
+		
+		return new ResponseEntity<ClientePaginacao>(clientePaginacao, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "Buscar Clientes por E-mail", nickname = "buscaClientePorEmail", notes = "Recuperar o cliente através do <b>'e-mail'<\b>"
-			+ "através do <b>'e-mail'</b>",response = ClienteDto.class)
+	@ApiOperation(value = "Buscar Clientes por E-mail", nickname = "buscaCliente", notes = "Recuperar o cliente através do <b>'e-mail'<\b>"
+			+ " ou da <b>'chave'</b>",response = ClienteDto.class)
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{e-mail}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
-	public ResponseEntity<ClienteDto> buscaClientePorEmail(
-			@ApiParam(value = "Identificador do cliente", example = "gutodarbem@gmail.com", type = "string", name = "e-mail") 
-			@PathVariable(name = "e-mail", required = true) final String email) {
+	@RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET, params = {"e-mail", "id"})
+	public ResponseEntity<ClienteDto> buscaCliente(
+			@ApiParam(value = "Identificador do cliente", example = "gutodarbem@gmail.com", type = "string", name = "e-mail")
+			@RequestParam(required = false, name = "e-mail") final Integer size,
+			
+			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id")
+			@RequestParam(name = "id", required = true) final String id){
 
 
 			ClienteDto cliente = new ClienteDto();
@@ -141,11 +118,11 @@ public class ClienteController {
 	@ApiOperation(value = "Apagar Cliente", nickname = "apagarCliente", notes = "Apagar cliente através do <b>'e-mail'<\b>")
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{e-mail}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.DELETE)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void apagarCliente(
-			@ApiParam(value = "Identificador do cliente", example = "gutodarbem@gmail.com", type = "string", name = "e-mail") 
-			@PathVariable(name = "e-mail", required = true) final String email) {
+			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
+			@PathVariable(name = "id", required = true) final String id) {
 
 		LOG.info("Pagina: {}, Tamanho: {}");
 

@@ -40,9 +40,9 @@ public class ProdutoController {
 	@ApiResponses(value = { 
 			@ApiResponse(code = 206, message = "Partial Content", response = ProdutoPaginacaoDto.class),
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{e-mail}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ProdutoPaginacaoDto> listarProdutosPorCliente(
-			@ApiParam(value = "Identificador do cliente", example = "gutodarbem@gmail.com", type = "string", name = "e-mail") 
+			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
 			@PathVariable(name = "e-mail", required = true) final String email) {
 
 		LOG.info("Pagina: {}, Tamanho: {}", email);
@@ -76,11 +76,11 @@ public class ProdutoController {
 	@ApiOperation(value = "Adicionar produto favorito", nickname = "acidionarProdutoFavorito", notes = "Adicionar produtos favorito")
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{e-mail}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void acidionarProdutoFavorito(
-			@ApiParam(value = "Identificador do cliente", example = "gutodarbem@gmail.com", type = "string", name = "e-mail")
-			@PathVariable(name = "e-mail", required = true) final String email,
+			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id")
+			@PathVariable(name = "id", required = true) final String id,
 			@ApiParam(value = "Identificador dos produtos", required = true, allowEmptyValue = false, example = "", type = "AdicionarProduto", name = "ids") 
 			@RequestBody final AdicionarProduto adicionarProduto
 
@@ -93,10 +93,10 @@ public class ProdutoController {
 	@ApiOperation(value = "Remover produto favorito", nickname = "acidionarProdutoFavorito", notes = "Remover produtos favorito")
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{e-mail}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.DELETE)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void removerProdutoFavorito(
-			@ApiParam(value = "Identificador do cliente", example = "gutodarbem@gmail.com", type = "string", name = "e-mail") 
+			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
 			@PathVariable(name = "e-mail", required = true) final String email,
 			@ApiParam(value = "Identificador dos produtos", type = "AdicionarProduto", name = "ids") 
 			@RequestBody(required = true) final AdicionarProduto adicionarProduto

@@ -15,6 +15,14 @@ public class ClientePaginacao {
 	@JsonProperty("clientes")
 	private List<ClienteDto> clientes;
 
+	
+	public ClientePaginacao(Paginacao paginacao){
+		this.meta = paginacao;
+	}
+	
+	public ClientePaginacao(){
+	}
+	
 	public Paginacao getMeta() {
 		return meta;
 	}
