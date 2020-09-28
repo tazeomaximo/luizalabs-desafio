@@ -1,4 +1,4 @@
-USE desafio-luizalabs;
+USE desafioluizalabs;
 
 SET character_set_client = utf8;
 SET character_set_connection = utf8;
@@ -6,7 +6,7 @@ SET character_set_results = utf8;
 SET collation_connection = utf8_general_ci;
 
 CREATE TABLE cliente (
-        id_cliente int AUTO_INCREMENT,
+    id_cliente int AUTO_INCREMENT,
     email VARCHAR(150) NOT NULL,
     nome VARCHAR(150) NOT NULL,
         PRIMARY KEY (id_cliente)

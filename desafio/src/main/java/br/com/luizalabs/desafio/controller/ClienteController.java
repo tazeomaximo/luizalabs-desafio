@@ -1,10 +1,5 @@
 package br.com.luizalabs.desafio.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.websocket.server.PathParam;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import br.com.luizalabs.desafio.dto.ClienteDto;
 import br.com.luizalabs.desafio.dto.ClientePaginacao;
 import br.com.luizalabs.desafio.dto.MensagemDto;
-import br.com.luizalabs.desafio.dto.Paginacao;
-import br.com.luizalabs.desafio.dto.ProdutoDto;
+import br.com.luizalabs.desafio.dto.RetornoId;
 import br.com.luizalabs.desafio.service.ClienteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -50,12 +44,14 @@ public class ClienteController {
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
 	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void incluirCliente(
+	public ResponseEntity<RetornoId> incluirCliente(
 			@ApiParam(value = "Dados do Cliente", required = true) 
 			@RequestBody(required = true) final ClienteDto cliente) {
 
-		LOG.info(cliente.toString());
-
+		RetornoId id =  clienteService.inserirCliente(cliente);
+		
+		
+		return new ResponseEntity<RetornoId>(id, HttpStatus.CREATED);
 	}
 
 	@ApiOperation(value = "Atualizar Cliente", nickname = "atualizarCliente", notes = "Nesse método é possível atualizar todos os atributos "
@@ -63,15 +59,13 @@ public class ClienteController {
 			, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.PUT)
+	@RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.PUT)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void atualizarCliente(
-			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
-			@PathVariable(name = "e-mail", required = true) final String email,
 			@ApiParam(value = "Dados do Cliente", required = true) 
 			@RequestBody(required = true) final ClienteDto cliente) {
 
-		LOG.info(cliente.toString());
+		clienteService.updateCliente(cliente);
 
 	}
 
@@ -102,15 +96,13 @@ public class ClienteController {
 	@RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET, params = {"e-mail", "id"})
 	public ResponseEntity<ClienteDto> buscaCliente(
 			@ApiParam(value = "Identificador do cliente", example = "gutodarbem@gmail.com", type = "string", name = "e-mail")
-			@RequestParam(required = false, name = "e-mail") final Integer size,
+			@RequestParam(required = false, name = "e-mail") final String email,
 			
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id")
-			@RequestParam(name = "id", required = true) final String id){
+			@RequestParam(name = "id", required = true) final Long id){
 
 
-			ClienteDto cliente = new ClienteDto();
-			cliente.setEmail("teste@gmail.com ");
-			cliente.setNome("Guto Darbem");
+		ClienteDto cliente = clienteService.getCliente(email,id);
 
 		return new ResponseEntity<ClienteDto>(cliente, HttpStatus.OK);
 	}
@@ -122,9 +114,9 @@ public class ClienteController {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void apagarCliente(
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
-			@PathVariable(name = "id", required = true) final String id) {
+			@PathVariable(name = "id", required = true) final Long id) {
 
-		LOG.info("Pagina: {}, Tamanho: {}");
+		clienteService.apagarCliente(id);
 
 	}
 

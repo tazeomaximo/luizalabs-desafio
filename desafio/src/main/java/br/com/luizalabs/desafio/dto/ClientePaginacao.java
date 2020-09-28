@@ -12,7 +12,7 @@ public class ClientePaginacao {
 	@JsonProperty("meta")
 	private Paginacao meta;
 	
-	@JsonProperty("clientes")
+	@JsonProperty("clients")
 	private List<ClienteDto> clientes;
 
 	

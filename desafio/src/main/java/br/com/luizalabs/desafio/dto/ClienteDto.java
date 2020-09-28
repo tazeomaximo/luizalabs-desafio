@@ -14,8 +14,8 @@ public class ClienteDto {
 	@JsonProperty("id")
 	private Long id;
 
-	@ApiParam(type = "string", name = "nome", example = "Nome do cliente")
-	@JsonProperty("nome")
+	@ApiParam(type = "string", name = "name", example = "Nome do cliente")
+	@JsonProperty("name")
 	private String nome;
 
 	@ApiParam(type = "string", name = "e_mail", example = "E-mail do cliente: gutodarbem@gmail.com")

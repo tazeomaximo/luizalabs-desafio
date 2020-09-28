@@ -14,20 +14,20 @@ public class ProdutoDto {
 	@JsonProperty("id")
 	private String id;
 
-	@ApiParam(type = "string", name = "titulo", example = "Nome do produto")
-	@JsonProperty("titulo")
+	@ApiParam(type = "string", name = "title", example = "Nome do produto")
+	@JsonProperty("title")
 	private String titulo;
 
-	@ApiParam(type = "string", name = "imagem", example = "URL da imagem do produto")
-	@JsonProperty("imagem")
+	@ApiParam(type = "string", name = "image", example = "URL da imagem do produto")
+	@JsonProperty("image")
 	private String imagem;
 
-	@ApiParam(type = "double", name = "preco", example = "Valor do produto")
-	@JsonProperty("preco")
+	@ApiParam(type = "double", name = "price", example = "Valor do produto")
+	@JsonProperty("price")
 	private Double preco;
 
-	@ApiParam(type = "double", name = "review", example = "Média dos reviews para este produto")
-	@JsonProperty("review")
+	@ApiParam(type = "double", name = "reviewScore", example = "Média dos reviews para este produto")
+	@JsonProperty("reviewScore")
 	private Double reviewScore;
 
 	public String getId() {

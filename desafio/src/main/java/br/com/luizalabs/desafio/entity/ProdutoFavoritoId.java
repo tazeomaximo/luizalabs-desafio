@@ -1,15 +1,22 @@
 package br.com.luizalabs.desafio.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class ProdutoFavoritoId {
+public class ProdutoFavoritoId implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "ID_CLIENTE")
 	private Long idCliente;
 
-	@Column(name = "ID_PROTUDO")
+	@Column(name = "ID_PRODUTO")
 	private String idProduto;
 
 	public Long getIdCliente() {

@@ -3,6 +3,7 @@ package br.com.luizalabs.desafio.entity;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -13,7 +14,8 @@ public class ProdutoFavoritoEntity {
 	@EmbeddedId
 	private ProdutoFavoritoId id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = ClienteEntity.class)
+	@JoinColumn(name="id_cliente" , insertable = false, updatable = false)
 	private ClienteEntity cliente;
 
 	public ProdutoFavoritoId getId() {

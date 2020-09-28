@@ -9,8 +9,15 @@ public class ProdutoPaginacaoDto {
 	@JsonProperty("meta")
 	private Paginacao meta;
 
-	@JsonProperty("produtos")
+	@JsonProperty("products")
 	private List<ProdutoDto> produtos;
+
+	public ProdutoPaginacaoDto(Paginacao paginacao) {
+		this.meta = paginacao;
+	}
+	
+	public ProdutoPaginacaoDto() {
+	}
 
 	public Paginacao getMeta() {
 		return meta;

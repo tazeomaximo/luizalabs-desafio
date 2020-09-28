@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 public class ClienteEntity {
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "ID_CLIENTE")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -28,8 +29,7 @@ public class ClienteEntity {
 	@Column(name = "EMAIL")
 	private String email;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente", fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_CLIENTE")
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<ProdutoFavoritoEntity> produtos;
 
 	public Long getId() {

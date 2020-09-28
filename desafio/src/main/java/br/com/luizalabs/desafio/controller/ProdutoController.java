@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.luizalabs.desafio.dto.AdicionarProduto;
@@ -20,6 +22,7 @@ import br.com.luizalabs.desafio.dto.MensagemDto;
 import br.com.luizalabs.desafio.dto.Paginacao;
 import br.com.luizalabs.desafio.dto.ProdutoDto;
 import br.com.luizalabs.desafio.dto.ProdutoPaginacaoDto;
+import br.com.luizalabs.desafio.service.ProdutoFavoritoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -34,6 +37,9 @@ public class ProdutoController {
 	private static final Logger LOG = LoggerFactory.getLogger(ProdutoController.class);
 
 	private static final int BAD_REQUEST = 400;
+	
+	@Autowired
+	private ProdutoFavoritoService service;
 
 	@ApiOperation(value = "Recuperar lista de produtos favoritos do Cliente", nickname = "apagarCliente"
 			, notes = "Recuperar a lista de produtos favorito do cliente através do <b>'e-mail'</b>")
@@ -43,34 +49,17 @@ public class ProdutoController {
 	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ProdutoPaginacaoDto> listarProdutosPorCliente(
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
-			@PathVariable(name = "e-mail", required = true) final String email) {
+			@PathVariable(name = "id", required = true) final Long id,
+			
+			@ApiParam(value = "Página", required = false, allowEmptyValue = true, example = "1", type = "int", name = "page") 
+			@RequestParam(required = false, name = "page", defaultValue = "1") final Integer page,
+			
+			@ApiParam(value = "Tamanho da página", required = false, allowEmptyValue = true, example = "100", type = "int", name = "size")
+			@RequestParam(required = false, name = "size", defaultValue = "100") final Integer size) {
 
-		LOG.info("Pagina: {}, Tamanho: {}", email);
-		
-		List<ProdutoDto> produtos = new ArrayList<ProdutoDto>();
+		ProdutoPaginacaoDto paginacaoDto =  service.getProdutoFavorito(id, page, size);
 
-		for (Long i = 0L; i <= 5; i++) {
-			ProdutoDto produto = new ProdutoDto();
-
-			produto.setId(i.toString());
-			produto.setImagem("URL_IMAGEM");
-			produto.setPreco(1.6 + i);
-			produto.setReviewScore(12.5 + i);
-			produto.setTitulo("Titulo: " + i);
-
-			produtos.add(produto);
-		}
-		
-		ProdutoPaginacaoDto produtoPaginacaoDto = new ProdutoPaginacaoDto();
-		
-		Paginacao p = new Paginacao();
-		p.setPageNumber(1);
-		p.setPagerSize(10);
-		
-		produtoPaginacaoDto.setMeta(p);
-		produtoPaginacaoDto.setProdutos(produtos);
-
-		return new ResponseEntity<ProdutoPaginacaoDto>(produtoPaginacaoDto, HttpStatus.OK);
+		return new ResponseEntity<ProdutoPaginacaoDto>(paginacaoDto, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Adicionar produto favorito", nickname = "acidionarProdutoFavorito", notes = "Adicionar produtos favorito")
@@ -80,13 +69,11 @@ public class ProdutoController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void acidionarProdutoFavorito(
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id")
-			@PathVariable(name = "id", required = true) final String id,
+			@PathVariable(name = "id", required = true) final Long id,
 			@ApiParam(value = "Identificador dos produtos", required = true, allowEmptyValue = false, example = "", type = "AdicionarProduto", name = "ids") 
-			@RequestBody final AdicionarProduto adicionarProduto
+			@RequestBody final AdicionarProduto adicionarProduto) {
 
-	) {
-
-		LOG.info("IDs: {}", adicionarProduto.getIds());
+		service.adicionarProdutoFavorito(id, adicionarProduto.getIds());
 
 	}
 
@@ -97,13 +84,13 @@ public class ProdutoController {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void removerProdutoFavorito(
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
-			@PathVariable(name = "e-mail", required = true) final String email,
+			@PathVariable(name = "id", required = true) final Long id,
 			@ApiParam(value = "Identificador dos produtos", type = "AdicionarProduto", name = "ids") 
 			@RequestBody(required = true) final AdicionarProduto adicionarProduto
 
 	) {
 
-		LOG.info("IDs: {}", adicionarProduto.getIds());
+		service.removerProdutoFavorito(id, adicionarProduto.getIds());
 
 	}
 
