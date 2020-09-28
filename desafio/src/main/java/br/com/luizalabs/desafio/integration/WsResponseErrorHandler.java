@@ -14,7 +14,7 @@ public class WsResponseErrorHandler implements ResponseErrorHandler{
 
 	@Override
 	public boolean hasError(ClientHttpResponse response) throws IOException {
-		LOG.info("[info] - response status code: {}", response.getRawStatusCode());
+		LOG.debug("[info] - response status code: {}", response.getRawStatusCode());
 
 		return (response.getStatusCode().series() == Series.CLIENT_ERROR
 		    || response.getStatusCode().series() == Series.SERVER_ERROR);
@@ -24,7 +24,7 @@ public class WsResponseErrorHandler implements ResponseErrorHandler{
 	public void handleError(ClientHttpResponse response) throws IOException {
 //		final RequestException requestException = this.getMapError().get(response.getRawStatusCode());
 
-		LOG.info("[info] - Convertendo response exception");
+		LOG.debug("[info] - Convertendo response exception");
 
 //		final String jsonResponse = StreamUtils.copyToString(response.getBody(), Charset.forName("UTF-8"));
 //

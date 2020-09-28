@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import br.com.luizalabs.desafio.domain.MensagemEnum;
 import br.com.luizalabs.desafio.dto.ClienteDto;
 import br.com.luizalabs.desafio.dto.ClientePaginacao;
 import br.com.luizalabs.desafio.dto.MensagemDto;
 import br.com.luizalabs.desafio.dto.RetornoId;
+import br.com.luizalabs.desafio.exception.CustomException;
+import br.com.luizalabs.desafio.exception.InternalErrorException;
 import br.com.luizalabs.desafio.service.ClienteService;
+import br.com.luizalabs.desafio.util.MensagemUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -32,7 +36,12 @@ public class ClienteController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ClienteController.class);
 
+	private static final int PARTIAL_CONTENT = 206;
+
 	private static final int BAD_REQUEST = 400;
+	
+	@Autowired
+	private MensagemUtil mensagem;
 	
 	@Autowired
 	private ClienteService clienteService;
@@ -47,15 +56,22 @@ public class ClienteController {
 	public ResponseEntity<RetornoId> incluirCliente(
 			@ApiParam(value = "Dados do Cliente", required = true) 
 			@RequestBody(required = true) final ClienteDto cliente) {
-
-		RetornoId id =  clienteService.inserirCliente(cliente);
 		
-		
-		return new ResponseEntity<RetornoId>(id, HttpStatus.CREATED);
+		try {
+			RetornoId id =  clienteService.inserirCliente(cliente);
+			
+			
+			return new ResponseEntity<RetornoId>(id, HttpStatus.CREATED);
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar incluir cliente ({}). Erro: {}",cliente, e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
 	}
 
 	@ApiOperation(value = "Atualizar Cliente", nickname = "atualizarCliente", notes = "Nesse método é possível atualizar todos os atributos "
-			+ "do cliente."
+			+ "do cliente. <br> <n> Obs.: Campos passados como vazio, nulo ou somente com espaços serão desconsiderado.</n>"
 			, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
@@ -64,8 +80,14 @@ public class ClienteController {
 	public void atualizarCliente(
 			@ApiParam(value = "Dados do Cliente", required = true) 
 			@RequestBody(required = true) final ClienteDto cliente) {
-
-		clienteService.updateCliente(cliente);
+		try {
+			clienteService.updateCliente(cliente);
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar atualizar cliente ({}). Erro: {}",cliente, e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
 
 	}
 
@@ -73,7 +95,7 @@ public class ClienteController {
 			+ "A customização da quantidade de registros pode ser feita informando o parâmetro <b>'size'</b>. A paginação é feita através do parâmetro <b>'page'</b>"
 			, response = ClientePaginacao.class)
 	@ApiResponses(value = { 
-			@ApiResponse(code = 206, message = "Partial Content", response = ClientePaginacao.class),
+			@ApiResponse(code = PARTIAL_CONTENT, message = "Partial Content", response = ClientePaginacao.class),
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
 	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ClientePaginacao> listarCliente(
@@ -83,28 +105,43 @@ public class ClienteController {
 			@ApiParam(value = "Tamanho da página", required = false, allowEmptyValue = true, example = "100", type = "int", name = "size")
 			@RequestParam(required = false, name = "size", defaultValue = "100") final Integer size) {
 
+		try {
+			ClientePaginacao clientePaginacao = clienteService.findAll(page, size);
+			
+			HttpStatus httpStatus = HttpStatus.OK;
+			
+			if(clientePaginacao.getMeta().isNextPage()) {
+				 httpStatus = HttpStatus.PARTIAL_CONTENT;
+			}
 		
-		ClientePaginacao clientePaginacao = clienteService.findAll(page, size);
-		
-		return new ResponseEntity<ClientePaginacao>(clientePaginacao, HttpStatus.OK);
+			return new ResponseEntity<ClientePaginacao>(clientePaginacao, httpStatus);
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar recuperar cliente (page = {}, size = {}). Erro: {}",page, size, e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
 	}
 	
 	@ApiOperation(value = "Buscar Clientes por E-mail", nickname = "buscaCliente", notes = "Recuperar o cliente através do <b>'e-mail'<\b>"
 			+ " ou da <b>'chave'</b>",response = ClienteDto.class)
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET, params = {"e-mail", "id"})
+	@RequestMapping(path = "/{id-email}",produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ClienteDto> buscaCliente(
-			@ApiParam(value = "Identificador do cliente", example = "gutodarbem@gmail.com", type = "string", name = "e-mail")
-			@RequestParam(required = false, name = "e-mail") final String email,
-			
-			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id")
-			@RequestParam(name = "id", required = true) final Long id){
+			@ApiParam(value = "Identificador do cliente", example = "123", type = "string", name = "id-email")
+			@PathVariable(name = "id-email", required = true) final String id){
 
-
-		ClienteDto cliente = clienteService.getCliente(email,id);
-
-		return new ResponseEntity<ClienteDto>(cliente, HttpStatus.OK);
+		try {
+			ClienteDto cliente = clienteService.getCliente(id);
+	
+			return new ResponseEntity<ClienteDto>(cliente, HttpStatus.OK);
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar recuperar cliente (email ou id = {}). Erro: {}", id, e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
 	}
 
 	@ApiOperation(value = "Apagar Cliente", nickname = "apagarCliente", notes = "Apagar cliente através do <b>'e-mail'<\b>")
@@ -116,8 +153,24 @@ public class ClienteController {
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
 			@PathVariable(name = "id", required = true) final Long id) {
 
-		clienteService.apagarCliente(id);
+		try {
+			clienteService.apagarCliente(id);
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar excluír cliente. {}",e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
 
+	}
+	
+	private MensagemDto  getMensagemDto(MensagemEnum mensagemEnum) {
+		
+		MensagemDto mensagemDto = new MensagemDto();
+		mensagemDto.setCodigo(mensagemEnum.getId());
+		mensagemDto.setMensagem(mensagem.getMessageDesc(mensagemEnum.getMensagem()));
+		
+		return mensagemDto;
 	}
 
 

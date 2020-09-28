@@ -1,8 +1,5 @@
 package br.com.luizalabs.desafio.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import br.com.luizalabs.desafio.domain.MensagemEnum;
 import br.com.luizalabs.desafio.dto.AdicionarProduto;
 import br.com.luizalabs.desafio.dto.MensagemDto;
-import br.com.luizalabs.desafio.dto.Paginacao;
-import br.com.luizalabs.desafio.dto.ProdutoDto;
 import br.com.luizalabs.desafio.dto.ProdutoPaginacaoDto;
+import br.com.luizalabs.desafio.exception.CustomException;
+import br.com.luizalabs.desafio.exception.InternalErrorException;
 import br.com.luizalabs.desafio.service.ProdutoFavoritoService;
+import br.com.luizalabs.desafio.util.MensagemUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -38,13 +37,18 @@ public class ProdutoController {
 
 	private static final int BAD_REQUEST = 400;
 	
+	private static final int PARTIAL_CONTENT = 206;
+	
+	@Autowired
+	private MensagemUtil mensagem;
+	
 	@Autowired
 	private ProdutoFavoritoService service;
 
 	@ApiOperation(value = "Recuperar lista de produtos favoritos do Cliente", nickname = "apagarCliente"
 			, notes = "Recuperar a lista de produtos favorito do cliente através do <b>'e-mail'</b>")
 	@ApiResponses(value = { 
-			@ApiResponse(code = 206, message = "Partial Content", response = ProdutoPaginacaoDto.class),
+			@ApiResponse(code = PARTIAL_CONTENT, message = "Partial Content", response = ProdutoPaginacaoDto.class),
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
 	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ProdutoPaginacaoDto> listarProdutosPorCliente(
@@ -57,9 +61,22 @@ public class ProdutoController {
 			@ApiParam(value = "Tamanho da página", required = false, allowEmptyValue = true, example = "100", type = "int", name = "size")
 			@RequestParam(required = false, name = "size", defaultValue = "100") final Integer size) {
 
-		ProdutoPaginacaoDto paginacaoDto =  service.getProdutoFavorito(id, page, size);
-
-		return new ResponseEntity<ProdutoPaginacaoDto>(paginacaoDto, HttpStatus.OK);
+		try {
+			ProdutoPaginacaoDto paginacaoDto =  service.getProdutoFavorito(id, page, size);
+			
+			HttpStatus httpStatus = HttpStatus.OK;
+			
+			if(paginacaoDto.getMeta().isNextPage()) {
+				 httpStatus = HttpStatus.PARTIAL_CONTENT;
+			}
+	
+			return new ResponseEntity<ProdutoPaginacaoDto>(paginacaoDto, httpStatus);
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar recuperar produtos favorito. {}",e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
 	}
 
 	@ApiOperation(value = "Adicionar produto favorito", nickname = "acidionarProdutoFavorito", notes = "Adicionar produtos favorito")
@@ -73,7 +90,14 @@ public class ProdutoController {
 			@ApiParam(value = "Identificador dos produtos", required = true, allowEmptyValue = false, example = "", type = "AdicionarProduto", name = "ids") 
 			@RequestBody final AdicionarProduto adicionarProduto) {
 
-		service.adicionarProdutoFavorito(id, adicionarProduto.getIds());
+		try {
+			service.adicionarProdutoFavorito(id, adicionarProduto.getIds());
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar adicionar produto favorito. {}",e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
 
 	}
 
@@ -89,9 +113,25 @@ public class ProdutoController {
 			@RequestBody(required = true) final AdicionarProduto adicionarProduto
 
 	) {
+		
+		try {
+			service.removerProdutoFavorito(id, adicionarProduto.getIds());
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar excluír produto favorito. {}",e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
 
-		service.removerProdutoFavorito(id, adicionarProduto.getIds());
-
+	}
+	
+	private MensagemDto  getMensagemDto(MensagemEnum mensagemEnum) {
+		
+		MensagemDto mensagemDto = new MensagemDto();
+		mensagemDto.setCodigo(mensagemEnum.getId());
+		mensagemDto.setMensagem(mensagem.getMessageDesc(mensagemEnum.getMensagem()));
+		
+		return mensagemDto;
 	}
 
 }

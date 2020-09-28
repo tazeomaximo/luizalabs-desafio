@@ -1,5 +1,6 @@
 package br.com.luizalabs.desafio.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -13,16 +14,24 @@ public class Paginacao {
 	private Integer pageNumber;
 
 	@JsonProperty("page_size")
-	private Integer pagerSize;
-	
-	public Paginacao() {
-	}
-	
-	public Paginacao(Integer page, Integer size) {
-		this.pageNumber = page;
-		this.pagerSize = size;
-	}
+	private Integer pageSize;
 
+	@JsonProperty("total_records")
+	private long total;
+
+	@JsonProperty("total_pages")
+	private Integer totalPage;
+
+	@JsonIgnore
+	private boolean nextPage;
+
+	public Paginacao(Integer page, Integer size,Integer totalPage, long total, boolean nextPage) {
+		this.pageNumber = page;
+		this.pageSize = size;
+		this.nextPage = nextPage;
+		this.total = total;
+		this.totalPage = totalPage;
+	}
 
 	public Integer getPageNumber() {
 		return pageNumber;
@@ -32,48 +41,36 @@ public class Paginacao {
 		this.pageNumber = pageNumber;
 	}
 
-	public Integer getPagerSize() {
-		return pagerSize;
+	public Integer getPageSize() {
+		return pageSize;
 	}
 
-	public void setPagerSize(Integer pagerSize) {
-		this.pagerSize = pagerSize;
+	public void setPageSize(Integer pagerSize) {
+		this.pageSize = pagerSize;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((pageNumber == null) ? 0 : pageNumber.hashCode());
-		result = prime * result + ((pagerSize == null) ? 0 : pagerSize.hashCode());
-		return result;
+	public long getTotal() {
+		return total;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Paginacao other = (Paginacao) obj;
-		if (pageNumber == null) {
-			if (other.pageNumber != null)
-				return false;
-		} else if (!pageNumber.equals(other.pageNumber))
-			return false;
-		if (pagerSize == null) {
-			if (other.pagerSize != null)
-				return false;
-		} else if (!pagerSize.equals(other.pagerSize))
-			return false;
-		return true;
+	public void setTotal(long total) {
+		this.total = total;
 	}
 
-	@Override
-	public String toString() {
-		return "Page [pageNumber=" + pageNumber + ", pagerSize=" + pagerSize + "]";
+	public boolean isNextPage() {
+		return nextPage;
+	}
+
+	public void setNextPage(boolean nextPage) {
+		this.nextPage = nextPage;
+	}
+
+	public Integer getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(Integer totalPage) {
+		this.totalPage = totalPage;
 	}
 
 }

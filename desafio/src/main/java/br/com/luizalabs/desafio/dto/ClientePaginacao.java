@@ -14,7 +14,6 @@ public class ClientePaginacao {
 	
 	@JsonProperty("clients")
 	private List<ClienteDto> clientes;
-
 	
 	public ClientePaginacao(Paginacao paginacao){
 		this.meta = paginacao;
@@ -38,6 +37,5 @@ public class ClientePaginacao {
 	public void setClientes(List<ClienteDto> clientes) {
 		this.clientes = clientes;
 	}
-	
 
 }

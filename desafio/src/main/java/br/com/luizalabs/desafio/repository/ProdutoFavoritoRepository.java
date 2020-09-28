@@ -16,9 +16,9 @@ import br.com.luizalabs.desafio.entity.ProdutoFavoritoId;
 @Repository
 public interface ProdutoFavoritoRepository extends CrudRepository<ProdutoFavoritoEntity, ProdutoFavoritoId> {
 
-	PageImpl<ProdutoFavoritoEntity>  findByIdIdCliente(Long id, Pageable pageable);
+	PageImpl<ProdutoFavoritoEntity> findByIdIdCliente(Long id, Pageable pageable);
 
-	PageImpl<ProdutoFavoritoEntity>  findAll(Pageable pageable);
+	PageImpl<ProdutoFavoritoEntity> findAll(Pageable pageable);
 
 	@Transactional
 	@Modifying
