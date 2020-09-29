@@ -1,15 +1,25 @@
 package br.com.luizalabs.desafio.dto;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Example;
 
 @ApiModel("Paginacao")
 @JsonPropertyOrder(value = { "page_number", "page_size" })
-public class Paginacao {
+public class Paginacao implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@ApiParam(type = "int", name = "page_number", example = "Número da página atual")
 	@JsonProperty("page_number")
 	private Integer pageNumber;
 

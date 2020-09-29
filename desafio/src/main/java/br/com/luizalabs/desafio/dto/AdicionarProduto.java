@@ -1,5 +1,6 @@
 package br.com.luizalabs.desafio.dto;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,8 +9,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 
 @ApiModel("AdicionarProduto")
-public class AdicionarProduto {
+public class AdicionarProduto implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 510249563291902231L;
 	@ApiParam(type = "array", name = "ids", example = "Lista de código dos produtos")
 	@JsonProperty("ids")
 	private Set<String> ids;

@@ -1,5 +1,7 @@
 package br.com.luizalabs.desafio.dto;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -7,8 +9,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 
 @ApiModel("Cliente")
-@JsonPropertyOrder(value = { "nome", "e_mail" })
-public class ClienteDto {
+@JsonPropertyOrder(value = { "id", "nome", "e_mail" })
+public class ClienteDto implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@ApiParam(type = "long", name = "id", example = "Identificador único do cliente")
 	@JsonProperty("id")

@@ -1,10 +1,21 @@
 package br.com.luizalabs.desafio.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-public class ProdutoPaginacaoDto {
+import io.swagger.annotations.ApiModel;
+
+@ApiModel("ProdutoPaginacao")
+@JsonPropertyOrder(value = { "meta"})
+public class ProdutoPaginacaoDto implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7272405404302749434L;
 
 	@JsonProperty("meta")
 	private Paginacao meta;

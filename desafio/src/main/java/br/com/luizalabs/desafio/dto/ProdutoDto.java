@@ -1,5 +1,7 @@
 package br.com.luizalabs.desafio.dto;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -8,7 +10,12 @@ import io.swagger.annotations.ApiParam;
 
 @ApiModel("Produto")
 @JsonPropertyOrder(value = { "id", "titulo","image", "preco", "review" })
-public class ProdutoDto {
+public class ProdutoDto implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@ApiParam(type = "string", name = "id", example = "Identificador do Produto")
 	@JsonProperty("id")

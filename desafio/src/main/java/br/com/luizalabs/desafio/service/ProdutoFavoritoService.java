@@ -12,6 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import br.com.luizalabs.desafio.domain.MensagemEnum;
 import br.com.luizalabs.desafio.dto.Paginacao;
@@ -98,13 +99,13 @@ public class ProdutoFavoritoService extends AbstractService{
 		
 		Consumer<String> consumer = s ->{
 			
-//			ProdutoDto produto = null;
+			ProdutoDto produto = null;
 			
-//			if(StringUtils.hasText(s))
-//				produto = produtoIntegration.getProdutoById(s.trim());
-//			
-//			if(produto == null || produto.getId() == null)
-//				throw registroNaoEncontrado(s);
+			if(StringUtils.hasText(s))
+				produto = produtoIntegration.getProdutoById(s.trim());
+			
+			if(produto == null || produto.getId() == null)
+				throw registroNaoEncontrado(s);
 			
 			ProdutoFavoritoEntity entity = new ProdutoFavoritoEntity();
 			

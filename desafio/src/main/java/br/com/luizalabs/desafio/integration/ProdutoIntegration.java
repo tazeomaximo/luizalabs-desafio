@@ -3,6 +3,7 @@ package br.com.luizalabs.desafio.integration;
 import java.nio.charset.Charset;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus.Series;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
@@ -20,6 +21,9 @@ public class ProdutoIntegration {
 
 	@Value("${rest.template.connect.timeout}")
 	private Integer connectTimeout;
+	
+	@Value("${integration.url.luizalabs.challenge}")
+	private String urlchallnge;
 	
 	private RestTemplate rest;
 	
@@ -44,10 +48,11 @@ public class ProdutoIntegration {
 		this.rest = rest;
 	}
 
+	@Cacheable(cacheNames = "ProdutoDto", key="#idProduto")
 	public ProdutoDto getProdutoById(String idProduto) {
 
 		ResponseEntity<ProdutoDto> response = getRest().getForEntity(
-				"http://challenge-api.luizalabs.com/api/product/".concat(idProduto).concat("/"), ProdutoDto.class);
+				urlchallnge.concat(idProduto).concat("/"), ProdutoDto.class);
 
 		if(response.getStatusCode().series() == Series.SUCCESSFUL)		
 			return response.getBody();
