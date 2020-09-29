@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.luizalabs.desafio.domain.MensagemEnum;
 import br.com.luizalabs.desafio.dto.ClienteDto;
-import br.com.luizalabs.desafio.dto.ClientePaginacao;
+import br.com.luizalabs.desafio.dto.ClientePaginacaoDto;
 import br.com.luizalabs.desafio.dto.MensagemDto;
-import br.com.luizalabs.desafio.dto.RetornoId;
+import br.com.luizalabs.desafio.dto.RetornoIdDto;
 import br.com.luizalabs.desafio.exception.CustomException;
 import br.com.luizalabs.desafio.exception.InternalErrorException;
 import br.com.luizalabs.desafio.service.ClienteService;
@@ -53,15 +54,18 @@ public class ClienteController {
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
 	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ResponseEntity<RetornoId> incluirCliente(
+	public ResponseEntity<RetornoIdDto> incluirCliente(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
 			@ApiParam(value = "Dados do Cliente", required = true) 
 			@RequestBody(required = true) final ClienteDto cliente) {
 		
 		try {
-			RetornoId id =  clienteService.inserirCliente(cliente);
+			RetornoIdDto id =  clienteService.inserirCliente(cliente);
 			
 			
-			return new ResponseEntity<RetornoId>(id, HttpStatus.CREATED);
+			return new ResponseEntity<RetornoIdDto>(id, HttpStatus.CREATED);
 		}catch (CustomException e) {
 			throw e;
 		}catch (Throwable e) {
@@ -78,6 +82,9 @@ public class ClienteController {
 	@RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.PUT)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void atualizarCliente(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
 			@ApiParam(value = "Dados do Cliente", required = true) 
 			@RequestBody(required = true) final ClienteDto cliente) {
 		try {
@@ -93,12 +100,15 @@ public class ClienteController {
 
 	@ApiOperation(value = "Listar Todos Clientes", nickname = "listarCliente", notes = "Recuperar uma lista de clientes paginados por até 100 registros. "
 			+ "A customização da quantidade de registros pode ser feita informando o parâmetro <b>'size'</b>. A paginação é feita através do parâmetro <b>'page'</b>"
-			, response = ClientePaginacao.class)
+			, response = ClientePaginacaoDto.class)
 	@ApiResponses(value = { 
-			@ApiResponse(code = PARTIAL_CONTENT, message = "Partial Content", response = ClientePaginacao.class),
+			@ApiResponse(code = PARTIAL_CONTENT, message = "Partial Content", response = ClientePaginacaoDto.class),
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
 	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
-	public ResponseEntity<ClientePaginacao> listarCliente(
+	public ResponseEntity<ClientePaginacaoDto> listarCliente(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
 			@ApiParam(value = "Página", required = false, allowEmptyValue = true, example = "1", type = "int", name = "page") 
 			@RequestParam(required = false, name = "page", defaultValue = "1") final Integer page,
 			
@@ -106,7 +116,7 @@ public class ClienteController {
 			@RequestParam(required = false, name = "size", defaultValue = "100") final Integer size) {
 
 		try {
-			ClientePaginacao clientePaginacao = clienteService.findAll(page, size);
+			ClientePaginacaoDto clientePaginacao = clienteService.findAll(page, size);
 			
 			HttpStatus httpStatus = HttpStatus.OK;
 			
@@ -114,7 +124,7 @@ public class ClienteController {
 				 httpStatus = HttpStatus.PARTIAL_CONTENT;
 			}
 		
-			return new ResponseEntity<ClientePaginacao>(clientePaginacao, httpStatus);
+			return new ResponseEntity<ClientePaginacaoDto>(clientePaginacao, httpStatus);
 		}catch (CustomException e) {
 			throw e;
 		}catch (Throwable e) {
@@ -129,6 +139,9 @@ public class ClienteController {
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
 	@RequestMapping(path = "/{id-email}",produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ClienteDto> buscaCliente(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "string", name = "id-email")
 			@PathVariable(name = "id-email", required = true) final String id){
 
@@ -150,6 +163,9 @@ public class ClienteController {
 	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.DELETE)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void apagarCliente(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
 			@PathVariable(name = "id", required = true) final Long id) {
 

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel("ClientePaginacao")
-public class ClientePaginacao implements Serializable{
+public class ClientePaginacaoDto implements Serializable{
 	
 	/**
 	 * 
@@ -16,23 +16,23 @@ public class ClientePaginacao implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("meta")
-	private Paginacao meta;
+	private PaginacaoDto meta;
 	
 	@JsonProperty("clients")
 	private List<ClienteDto> clientes;
 	
-	public ClientePaginacao(Paginacao paginacao){
+	public ClientePaginacaoDto(PaginacaoDto paginacao){
 		this.meta = paginacao;
 	}
 	
-	public ClientePaginacao(){
+	public ClientePaginacaoDto(){
 	}
 	
-	public Paginacao getMeta() {
+	public PaginacaoDto getMeta() {
 		return meta;
 	}
 
-	public void setMeta(Paginacao meta) {
+	public void setMeta(PaginacaoDto meta) {
 		this.meta = meta;
 	}
 

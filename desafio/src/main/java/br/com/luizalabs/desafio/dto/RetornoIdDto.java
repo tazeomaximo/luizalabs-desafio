@@ -5,18 +5,21 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 
 @ApiModel("RetornoId")
-public class RetornoId implements Serializable{
+public class RetornoIdDto implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -9050156412850542004L;
+	
+	@ApiParam(name = "id", type = "int")
 	@JsonProperty("id")
 	private Object id;
 
-	public RetornoId(Object id) {
+	public RetornoIdDto(Object id) {
 		this.id = id;
 	}
 	
@@ -44,7 +47,7 @@ public class RetornoId implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RetornoId other = (RetornoId) obj;
+		RetornoIdDto other = (RetornoIdDto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

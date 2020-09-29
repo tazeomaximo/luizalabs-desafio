@@ -18,23 +18,23 @@ public class ProdutoPaginacaoDto implements Serializable{
 	private static final long serialVersionUID = 7272405404302749434L;
 
 	@JsonProperty("meta")
-	private Paginacao meta;
+	private PaginacaoDto meta;
 
 	@JsonProperty("products")
 	private List<ProdutoDto> produtos;
 	
-	public ProdutoPaginacaoDto(Paginacao paginacao) {
+	public ProdutoPaginacaoDto(PaginacaoDto paginacao) {
 		this.meta = paginacao;
 	}
 	
 	public ProdutoPaginacaoDto() {
 	}
 
-	public Paginacao getMeta() {
+	public PaginacaoDto getMeta() {
 		return meta;
 	}
 
-	public void setMeta(Paginacao meta) {
+	public void setMeta(PaginacaoDto meta) {
 		this.meta = meta;
 	}
 

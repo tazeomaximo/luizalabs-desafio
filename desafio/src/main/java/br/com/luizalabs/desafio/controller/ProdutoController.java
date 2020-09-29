@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,13 +46,40 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoFavoritoService service;
 
-	@ApiOperation(value = "Recuperar lista de produtos favoritos do Cliente", nickname = "apagarCliente"
+	@ApiOperation(value = "Recuperar lista de produtos", nickname = "listarProdutos"
+			, notes = "Recuperar a lista de produtos")
+	@ApiResponses(value = { 
+			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
+	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
+	public ResponseEntity<ProdutoPaginacaoDto> listarProdutos(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
+			@ApiParam(value = "Página", required = false, allowEmptyValue = true, example = "1", type = "int", name = "page") 
+			@RequestParam(required = false, name = "page", defaultValue = "1") final Integer page) {
+
+		try {
+			ProdutoPaginacaoDto paginacaoDto =  service.getAllProdutos(page);
+			
+			return new ResponseEntity<ProdutoPaginacaoDto>(paginacaoDto, HttpStatus.OK);
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar recuperar produtos favorito. {}",e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
+	}
+	
+	@ApiOperation(value = "Recuperar lista de produtos favoritos do Cliente", nickname = "listarProdutosPorCliente"
 			, notes = "Recuperar a lista de produtos favorito do cliente através do <b>'e-mail'</b>")
 	@ApiResponses(value = { 
 			@ApiResponse(code = PARTIAL_CONTENT, message = "Partial Content", response = ProdutoPaginacaoDto.class),
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
 	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ProdutoPaginacaoDto> listarProdutosPorCliente(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
 			@PathVariable(name = "id", required = true) final Long id,
 			
@@ -85,6 +113,9 @@ public class ProdutoController {
 	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void acidionarProdutoFavorito(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id")
 			@PathVariable(name = "id", required = true) final Long id,
 			@ApiParam(value = "Identificador dos produtos", required = true, allowEmptyValue = false, example = "", type = "AdicionarProduto", name = "ids") 
@@ -107,6 +138,9 @@ public class ProdutoController {
 	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.DELETE)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void removerProdutoFavorito(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
 			@ApiParam(value = "Identificador do cliente", example = "123", type = "long", name = "id") 
 			@PathVariable(name = "id", required = true) final Long id,
 			@ApiParam(value = "Identificador dos produtos", type = "AdicionarProduto", name = "ids") 

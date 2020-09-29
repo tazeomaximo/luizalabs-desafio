@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiParam;
 
 @ApiModel("Paginacao")
 @JsonPropertyOrder(value = { "page_number", "page_size" })
-public class Paginacao implements Serializable{
+public class PaginacaoDto implements Serializable{
 
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class Paginacao implements Serializable{
 	private Integer pageSize;
 
 	@JsonProperty("total_records")
-	private long total;
+	private Long total;
 
 	@JsonProperty("total_pages")
 	private Integer totalPage;
@@ -34,12 +34,15 @@ public class Paginacao implements Serializable{
 	@JsonIgnore
 	private boolean nextPage;
 
-	public Paginacao(Integer page, Integer size,Integer totalPage, long total, boolean nextPage) {
+	public PaginacaoDto(Integer page, Integer size,Integer totalPage, Long total, boolean nextPage) {
 		this.pageNumber = page;
 		this.pageSize = size;
 		this.nextPage = nextPage;
 		this.total = total;
 		this.totalPage = totalPage;
+	}
+	
+	public PaginacaoDto() {
 	}
 
 	public Integer getPageNumber() {
@@ -58,11 +61,11 @@ public class Paginacao implements Serializable{
 		this.pageSize = pagerSize;
 	}
 
-	public long getTotal() {
+	public Long getTotal() {
 		return total;
 	}
 
-	public void setTotal(long total) {
+	public void setTotal(Long total) {
 		this.total = total;
 	}
 

@@ -16,9 +16,9 @@ import org.springframework.util.StringUtils;
 
 import br.com.luizalabs.desafio.domain.MensagemEnum;
 import br.com.luizalabs.desafio.dto.ClienteDto;
-import br.com.luizalabs.desafio.dto.ClientePaginacao;
-import br.com.luizalabs.desafio.dto.Paginacao;
-import br.com.luizalabs.desafio.dto.RetornoId;
+import br.com.luizalabs.desafio.dto.ClientePaginacaoDto;
+import br.com.luizalabs.desafio.dto.PaginacaoDto;
+import br.com.luizalabs.desafio.dto.RetornoIdDto;
 import br.com.luizalabs.desafio.entity.ClienteEntity;
 import br.com.luizalabs.desafio.exception.BadRequestException;
 import br.com.luizalabs.desafio.repository.ClienteRepository;
@@ -55,6 +55,11 @@ public class ClienteService extends AbstractService{
 
 	private void validarCliente(ClienteDto clienteDto) {
 		
+		if(clienteDto.getId() != null ){
+			LOG.debug("Campo id nao permitido para inserir registro novo");
+			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_CAMPO_NAO_PERMITIDO, ID));
+		}
+		
 		if(!StringUtils.hasText(clienteDto.getEmail())) {
 			LOG.debug("Campo e_mail nao preenchido");
 			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_CAMPO_OBRIGATORIO, E_MAIL));
@@ -68,7 +73,7 @@ public class ClienteService extends AbstractService{
 		clienteDto.setNome(clienteDto.getNome().trim());
 	}
 	
-	public RetornoId inserirCliente(ClienteDto clienteDto) {
+	public RetornoIdDto inserirCliente(ClienteDto clienteDto) {
 		
 		validarCliente(clienteDto);
 		
@@ -80,10 +85,10 @@ public class ClienteService extends AbstractService{
 			clienteRepository.save(entity);
 		} catch (DataIntegrityViolationException e) {
 			LOG.debug("Email duplicado", e);
-			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_EMAIL_CADASTRADO));
+			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_EMAIL_JA_CADASTRADO));
 		}
 
-		return new RetornoId(entity.getId());
+		return new RetornoIdDto(entity.getId());
 
 	}
 
@@ -115,11 +120,11 @@ public class ClienteService extends AbstractService{
 			clienteRepository.save(entity);
 		} catch (DataIntegrityViolationException e) {
 			LOG.debug("Email duplicado", e);
-			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_EMAIL_CADASTRADO));
+			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_EMAIL_JA_CADASTRADO));
 		}
 	}
 
-	public ClientePaginacao findAll(Integer page, Integer size) {
+	public ClientePaginacaoDto findAll(Integer page, Integer size) {
 
 		validarPaginacao(page, size);
 		
@@ -127,7 +132,7 @@ public class ClienteService extends AbstractService{
 
 		PageImpl<ClienteEntity> clientes = clienteRepository.findAll(pr);
 		
-		Paginacao p = iniciaPaginacao(page, size, clientes);
+		PaginacaoDto p = iniciaPaginacao(page, size, clientes);
 
 		List<ClienteDto> clienteDtos = new ArrayList<ClienteDto>();
 
@@ -142,7 +147,7 @@ public class ClienteService extends AbstractService{
 		clientes.getContent().forEach(consumer);
 		
 		
-		ClientePaginacao cp = new ClientePaginacao(p);
+		ClientePaginacaoDto cp = new ClientePaginacaoDto(p);
 		
 		cp.setClientes(clienteDtos);
 

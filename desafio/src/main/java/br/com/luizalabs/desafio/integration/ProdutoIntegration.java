@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.luizalabs.desafio.dto.ProdutoDto;
+import br.com.luizalabs.desafio.dto.ProdutoPaginacaoDto;
 
 @Component
 public class ProdutoIntegration {
@@ -54,9 +55,21 @@ public class ProdutoIntegration {
 		ResponseEntity<ProdutoDto> response = getRest().getForEntity(
 				urlchallnge.concat(idProduto).concat("/"), ProdutoDto.class);
 
+		return (ProdutoDto) getObjectReturn(response);
+	}
+
+	private Object getObjectReturn(ResponseEntity<?> response) {
 		if(response.getStatusCode().series() == Series.SUCCESSFUL)		
 			return response.getBody();
 		return null;
+	}
+
+	public ProdutoPaginacaoDto getAll(Integer page) {
+		
+		ResponseEntity<ProdutoPaginacaoDto> response = getRest().getForEntity(
+				urlchallnge.concat("?page=").concat(page.toString()), ProdutoPaginacaoDto.class);
+		
+		return (ProdutoPaginacaoDto) getObjectReturn(response);
 	}
 
 }

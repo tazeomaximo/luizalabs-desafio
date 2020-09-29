@@ -3,7 +3,6 @@ package br.com.luizalabs.desafio.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -36,7 +35,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
+    	 web.ignoring().antMatchers("/api-docs",
+					                 "/configuration/ui",
+					                 "/swagger-resources/**",
+					                 "/configuration/security",
+					                 "/swagger-ui.html",
+					                 "/csrf",
+					                 "/webjars/**");
     }
 
     @Bean

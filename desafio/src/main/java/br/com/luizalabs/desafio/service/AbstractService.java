@@ -4,7 +4,7 @@ import org.springframework.data.domain.PageImpl;
 
 import br.com.luizalabs.desafio.domain.MensagemEnum;
 import br.com.luizalabs.desafio.dto.MensagemDto;
-import br.com.luizalabs.desafio.dto.Paginacao;
+import br.com.luizalabs.desafio.dto.PaginacaoDto;
 import br.com.luizalabs.desafio.exception.BadRequestException;
 import br.com.luizalabs.desafio.exception.NotFoundRequestException;
 import br.com.luizalabs.desafio.util.MensagemUtil;
@@ -23,22 +23,22 @@ public class AbstractService {
 	protected void validarPaginacao(Integer page, Integer size) {
 
 		if (page < 1) {
-			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_PAGINA, page));
+			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_PAGINA_NAO_ENCONTRADA, page));
 		}
 
 		if (size > 100 || size < 1) {
-			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_TAMANHO_PAGINA));
+			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_TAMANHO_PAGINA_NAO_PERMITIDO));
 		}
 	}
 
-	protected Paginacao iniciaPaginacao(Integer page, Integer size, PageImpl<?> pageImp) {
+	protected PaginacaoDto iniciaPaginacao(Integer page, Integer size, PageImpl<?> pageImp) {
 		if (page > pageImp.getTotalPages()) {
-			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_PAGINA, page));
+			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_PAGINA_NAO_ENCONTRADA, page));
 		}
 
 		boolean nextPage = isNextPage(pageImp, page);
 
-		Paginacao p = new Paginacao(page, size, pageImp.getTotalPages(), pageImp.getTotalElements(), nextPage);
+		PaginacaoDto p = new PaginacaoDto(page, size, pageImp.getTotalPages(), pageImp.getTotalElements(), nextPage);
 		return p;
 	}
 
