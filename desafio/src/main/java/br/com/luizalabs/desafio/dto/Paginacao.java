@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.Example;
 
 @ApiModel("Paginacao")
 @JsonPropertyOrder(value = { "page_number", "page_size" })
