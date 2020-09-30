@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import br.com.luizalabs.desafio.domain.MensagemEnum;
 import br.com.luizalabs.desafio.dto.AdicionarProduto;
 import br.com.luizalabs.desafio.dto.MensagemDto;
+import br.com.luizalabs.desafio.dto.ProdutoDto;
 import br.com.luizalabs.desafio.dto.ProdutoPaginacaoDto;
 import br.com.luizalabs.desafio.exception.CustomException;
 import br.com.luizalabs.desafio.exception.InternalErrorException;
@@ -70,12 +71,36 @@ public class ProdutoController {
 		}
 	}
 	
+	@ApiOperation(value = "Recuperar produto por Id", nickname = "getProdutosPorId"
+			, notes = "Recuperar produto por Id")
+	@ApiResponses(value = { 
+			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
+	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
+	public ResponseEntity<ProdutoDto> getProdutosPorId(
+			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
+			@RequestHeader("Authorization") final String authorization,
+			
+			@ApiParam(value = "Identificador do cliente", example = "c5dde7c9-f5e8-a1b0-60b9-d4f52d413e04", type = "string", name = "id") 
+			@PathVariable(name = "id", required = true) final String id) {
+
+		try {
+			ProdutoDto produtoDto =  service.getProduto(id);
+			
+			return new ResponseEntity<ProdutoDto>(produtoDto, HttpStatus.OK);
+		}catch (CustomException e) {
+			throw e;
+		}catch (Throwable e) {
+			LOG.error("Erro ao tentar recuperar produtos favorito. {}",e);
+			throw new InternalErrorException(getMensagemDto(MensagemEnum.ERRO_INEXPERADO));
+		}
+	}
+	
 	@ApiOperation(value = "Recuperar lista de produtos favoritos do Cliente", nickname = "listarProdutosPorCliente"
 			, notes = "Recuperar a lista de produtos favorito do cliente através do <b>'e-mail'</b>")
 	@ApiResponses(value = { 
 			@ApiResponse(code = PARTIAL_CONTENT, message = "Partial Content", response = ProdutoPaginacaoDto.class),
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
+	@RequestMapping(value = "/cliente/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ProdutoPaginacaoDto> listarProdutosPorCliente(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
 			@RequestHeader("Authorization") final String authorization,

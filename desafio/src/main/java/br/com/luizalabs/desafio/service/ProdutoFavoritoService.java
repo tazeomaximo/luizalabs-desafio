@@ -95,8 +95,12 @@ public class ProdutoFavoritoService extends AbstractService {
 
 			ProdutoDto produto = null;
 
-			if (StringUtils.hasText(s))
-				produto = produtoIntegration.getProdutoById(s.trim());
+			if (!StringUtils.hasText(s))
+				throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_CAMPO_OBRIGATORIO, IDS));
+			
+			String idProduto = s.trim();
+			
+			produto = produtoIntegration.getProdutoById(idProduto);
 
 			if (produto == null || produto.getId() == null)
 				throw registroNaoEncontrado(s);
@@ -106,7 +110,7 @@ public class ProdutoFavoritoService extends AbstractService {
 			ProdutoFavoritoId id = new ProdutoFavoritoId();
 
 			id.setIdCliente(idCliente);
-			id.setIdProduto(s);
+			id.setIdProduto(idProduto);
 
 			entity.setId(id);
 
@@ -144,6 +148,19 @@ public class ProdutoFavoritoService extends AbstractService {
 			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_PAGINA_NAO_ENCONTRADA, page));
 
 		return produtoPaginacaoDto;
+	}
+
+	public ProdutoDto getProduto(String id) {
+		if (!StringUtils.hasText(id)) {
+			throw new BadRequestException(getMensagemDto(MensagemEnum.ERRO_CAMPO_OBRIGATORIO, IDS));
+		}
+		
+		ProdutoDto produto = produtoIntegration.getProdutoById(id.trim());
+
+		if (produto == null || produto.getId() == null)
+			throw registroNaoEncontrado(id);
+		
+		return produto;
 	}
 
 }

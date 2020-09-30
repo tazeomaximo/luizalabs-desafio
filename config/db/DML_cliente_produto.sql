@@ -19,5 +19,3 @@ INSERT INTO produto_favorito (id_cliente, id_produto) VALUES
 	,(1, 'dce33cfd-ccb1-c972-da0e-eddefcd1346b')
 	,(2, '1bf0f365-fbdd-4e21-9786-da459d78dd1f')
 	,(2, 'ec92cbdd-b7e6-e2c2-a0e8-70ae001cb3d8');
-	
-commit;

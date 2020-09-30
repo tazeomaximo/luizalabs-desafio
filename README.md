@@ -23,6 +23,7 @@ O Vagrant tinha visto apenas no curso, agora com o handson tive que buscar o con
 	1. [Instalando Vagrant](https://www.vagrantup.com/)
 	2. [Criando a máquina passando arquivos para ela](https://www.vagrantup.com/docs/provisioning/file.html)
 	3. [Instalando Docker na imagens criada pelo Vagrant](https://docs.docker.com/engine/install/debian/)
+	4. [Vagrant como ambiente de Desenvolvimento](https://nandovieira.com.br/usando-o-vagrant-como-ambiente-de-desenvolvimento-no-windows)
 
 ### Docker
 Conheço os conceitos e fiz um curso na minha antiga empresa, porém já não lembrava mais os comandos. Então utilizei os links abaixo para me ajudarem a desenvolver o Desafio.
@@ -40,15 +41,22 @@ Acessar a documentação em swagger do serviço
 
 # Executar aplicação
 
-	instalar o vagrant -> https://www.vagrantup.com/
+	- Se não estiver uma maquina linux:
+		1. Seguir os passos desse link [Vagrant como ambiente de Desenvolvimento](https://nandovieira.com.br/usando-o-vagrant-como-ambiente-de-desenvolvimento-no-windows) para instalar o VirtualBox, Vagrant e gerar a chave privada de acesso ao vagrant.
+		2. Após configurar o Vagrant, entrar na pasta do projeto e executar o comandos:
+			3.1. vagrant up - Esse comando irá criar a máquina linux
+			3.2. vagrant ssh - para acessar a máquina criada no comando acima.
 	
-	depois de intalado copiar o arquivo Vagrant
+	- Daqui em diante é para maquinas linux
+		1. Instalar o [docker](https://docs.docker.com/engine/install/debian/)
+		2. Instalar o docker-compose -> https://docs.docker.com/compose/install/
 	
-	Atualizar debian e instalar o docker ->
-	começar por esse se o debaixo der erro na lib https://www.hostinger.com.br/tutoriais/install-docker-ubuntu
-	https://docs.docker.com/engine/install/debian/
+	- Criando o ambiente
+		1. Rodar o comando abaixo para criar a imagem
+			1.1 docker build -f Dockerfile -t img-desafio .
+			1.2 docker-compose up --remove-orphans
 	
-	docker-compose -> https://docs.docker.com/compose/install/
 	
-	sudo apt update
-	sudo apt upgrade
+	
+	
+	

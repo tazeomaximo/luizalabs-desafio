@@ -1,7 +1,7 @@
 version: '3.5'
 services:
 
-    database:
+    mysql-container:
         image: mysql:5.7
         container_name: mysql-desafio
         ports:
@@ -13,3 +13,42 @@ services:
             MYSQL_PASSWORD: desafio
         volumes:
         - ./db:/docker-entrypoint-initdb.d
+        networks:
+            - desafio-network
+            
+    redis-container:
+        image: redis
+        container_name: redis-desafio
+        ports:
+            - "6379:6379"
+        volumes:
+        - ./redis.conf:/usr/local/etc/redis/redis.conf
+        networks:
+            - desafio-network
+    
+    app-desafio-container:
+        image: img-desafio:latest
+        container_name: app-desafio
+        ports:
+            - "8082:8082"
+        environment:
+           REDIS_HOST: redis-desafio
+           REDIS_PORT: 6379
+           MYSQL_HOST: mysql-desafio
+           MYSQL_PORT: 3306
+           MYSQL_DATABASE: desafioluizalabs
+           MYSQL_USER_NAME: desafio
+           MYSQL_PASSWORD: desafio
+           TOKEN_REFRESH: 240
+           TOKEN_ACCESS_TIME: 120
+           URL_CHALLENGE: http://challenge-api.luizalabs.com/api/product/
+           PROFILES_ACTIVE: dev
+        depends_on:
+            - mysql-container
+            - redis-container
+        networks:
+            - desafio-network            
+            
+networks: 
+  desafio-network:
+    driver: bridge            

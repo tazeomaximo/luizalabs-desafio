@@ -64,6 +64,7 @@ public class ProdutoIntegration {
 		return null;
 	}
 
+	@Cacheable(cacheNames = "ProdutoPaginacaoDto", key="#page")
 	public ProdutoPaginacaoDto getAll(Integer page) {
 		
 		ResponseEntity<ProdutoPaginacaoDto> response = getRest().getForEntity(
