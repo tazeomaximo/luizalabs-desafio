@@ -51,7 +51,7 @@ public class ProdutoController {
 			, notes = "Recuperar a lista de produtos")
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
+	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ProdutoPaginacaoDto> listarProdutos(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
 			@RequestHeader("Authorization") final String authorization,
@@ -75,7 +75,7 @@ public class ProdutoController {
 			, notes = "Recuperar produto por Id")
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ProdutoDto> getProdutosPorId(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
 			@RequestHeader("Authorization") final String authorization,
@@ -100,7 +100,7 @@ public class ProdutoController {
 	@ApiResponses(value = { 
 			@ApiResponse(code = PARTIAL_CONTENT, message = "Partial Content", response = ProdutoPaginacaoDto.class),
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/cliente/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
+	@RequestMapping(value = "/cliente/{id}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ProdutoPaginacaoDto> listarProdutosPorCliente(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
 			@RequestHeader("Authorization") final String authorization,
@@ -135,7 +135,7 @@ public class ProdutoController {
 	@ApiOperation(value = "Adicionar produto favorito", nickname = "acidionarProdutoFavorito", notes = "Adicionar produtos favorito")
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
+	@RequestMapping(value = "/cliente/{id}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.POST)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void acidionarProdutoFavorito(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
@@ -160,7 +160,7 @@ public class ProdutoController {
 	@ApiOperation(value = "Remover produto favorito", nickname = "acidionarProdutoFavorito", notes = "Remover produtos favorito")
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.DELETE)
+	@RequestMapping(value = "/cliente/{id}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.DELETE)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void removerProdutoFavorito(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")

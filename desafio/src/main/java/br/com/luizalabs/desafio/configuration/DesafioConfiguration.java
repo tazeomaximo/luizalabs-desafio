@@ -27,8 +27,6 @@ public class DesafioConfiguration {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 		    .apis(RequestHandlerSelectors.basePackage("br.com.luizalabs.desafio.controller"))
 		    .build()
-		    //.directModelSubstitute(org.threeten.bp.LocalDate.class, java.sql.Date.class)
-		    //.directModelSubstitute(org.threeten.bp.OffsetDateTime.class, java.util.Date.class)
 		    .apiInfo(this.apiInfo());
 	}
 

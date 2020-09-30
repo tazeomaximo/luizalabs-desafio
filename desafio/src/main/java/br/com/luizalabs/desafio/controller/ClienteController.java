@@ -49,10 +49,10 @@ public class ClienteController {
 
 	@ApiOperation(value = "Incluir Cliente", nickname = "incluirCliente", notes = "Nesse método é possível incluir o cliente"
 			+ "<br> Use o <b>e-mail</b> como a chave de busca, ele é unico em nossa base de dados."
-			, consumes = MediaType.APPLICATION_JSON_VALUE )
+			, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE )
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
+	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.POST)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public ResponseEntity<RetornoIdDto> incluirCliente(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
@@ -76,10 +76,10 @@ public class ClienteController {
 
 	@ApiOperation(value = "Atualizar Cliente", nickname = "atualizarCliente", notes = "Nesse método é possível atualizar todos os atributos "
 			+ "do cliente. <br> <n> Obs.: Campos passados como vazio, nulo ou somente com espaços serão desconsiderado.</n>"
-			, consumes = MediaType.APPLICATION_JSON_VALUE)
+			, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.PUT)
+	@RequestMapping(produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.PUT)
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void atualizarCliente(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
@@ -104,7 +104,7 @@ public class ClienteController {
 	@ApiResponses(value = { 
 			@ApiResponse(code = PARTIAL_CONTENT, message = "Partial Content", response = ClientePaginacaoDto.class),
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
+	@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ClientePaginacaoDto> listarCliente(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
 			@RequestHeader("Authorization") final String authorization,
@@ -137,7 +137,7 @@ public class ClienteController {
 			+ " ou da <b>'chave'</b>",response = ClienteDto.class)
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(path = "/{id-email}",produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
+	@RequestMapping(path = "/{id-email}",produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.GET)
 	public ResponseEntity<ClienteDto> buscaCliente(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")
 			@RequestHeader("Authorization") final String authorization,
@@ -160,7 +160,7 @@ public class ClienteController {
 	@ApiOperation(value = "Apagar Cliente", nickname = "apagarCliente", notes = "Apagar cliente através do <b>'e-mail'<\b>")
 	@ApiResponses(value = { 
 			@ApiResponse(code = BAD_REQUEST, message = "", response = MensagemDto.class) })
-	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, method = RequestMethod.DELETE)
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void apagarCliente(
 			@ApiParam(value = "Token de Autorização", required = true, example = "Bearer d5298030-fb34-4cae-a6cd-7b26abae9e42", type = "string", name = "Authorization")

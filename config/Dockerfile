@@ -20,6 +20,7 @@ ENV TOKEN_REFRESH 600
 ENV TOKEN_ACCESS_TIME 60
 ENV URL_CHALLENGE http://challenge-api.luizalabs.com/api/product/
 ENV PROFILES_ACTIVE prod
+ENV Lang en_us.utf-8
 
 # The application's jar file
 ARG JAR_FILE=desafio.jar

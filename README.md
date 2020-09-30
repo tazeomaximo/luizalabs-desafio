@@ -30,11 +30,12 @@ Conheço os conceitos e fiz um curso na minha antiga empresa, porém já não le
 
 	1. [Docker Compose - configurando redes](https://docs.docker.com/compose/networking/)
 	2. [Instalando Docker na imagens criada pelo Vagrant](https://docs.docker.com/engine/install/debian/)
+	3. [Montando Imagem](https://dzone.com/articles/all-about-hibernate-manytomany-association)
 
 
 # Aplicação
 
-Acessar a documentação em swagger do serviço
+Acessar a documentação em swagger do serviço:
 
 		http://{ip}:{port}/desafio/swagger-ui.htm
 

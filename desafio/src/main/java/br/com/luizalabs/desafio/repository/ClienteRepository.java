@@ -22,5 +22,5 @@ public interface ClienteRepository extends CrudRepository<ClienteEntity, Long> {
 	Optional<ClienteEntity> findByIdOrEmail(@Param("id") Long id, @Param("email") String email );
 	
 	@Query("select c.id  from #{#entityName} c where c.id = :id ")
-	Optional<Integer> isIdClienteExiste(@Param("id") Long id);
+	Optional<Long> isIdClienteExiste(@Param("id") Long id);
 }
