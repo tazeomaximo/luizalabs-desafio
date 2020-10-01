@@ -17,9 +17,9 @@ Quando utilizei o Redis, apenas elaborei uma parte da definição da arquitetura
 	5. [Apagando todo cache do Redis](https://dev.to/sr2ds/apagando-o-cache-do-redis-37b7)  
 
 ### Vagrant
-Conhecia o Vagrant apenas teoricamente, agora com o desafio, tive que colocar o conhecimento em prática.  
+Conhecia o Vagrant apenas teoricamente. Com o desafio, tive que colocar o conhecimento em prática.  
 	1. [Instalando Vagrant](https://www.vagrantup.com/)  
-	2. [Criando a máquina passando arquivos para ela](https://www.vagrantup.com/docs/provisioning/file.html)
+	2. [Criando a máquina passando arquivos para ela](https://www.vagrantup.com/docs/provisioning/file.html)  
 	3. [Vagrant como ambiente de Desenvolvimento](https://nandovieira.com.br/usando-o-vagrant-como-ambiente-de-desenvolvimento-no-windows)  
 
 ### Docker
@@ -29,15 +29,15 @@ Conhecia os conceitos, porém já não lembrava mais os comandos. Então utilize
 	3. [Montando Imagem](https://dzone.com/articles/all-about-hibernate-manytomany-association)  
 
 # Executar aplicação
-- Se não tiver uma máquina linux:
-		1. Seguir os passos desse link [Vagrant como ambiente de Desenvolvimento](https://nandovieira.com.br/usando-o-vagrant-como-ambiente-de-desenvolvimento-no-windows) para instalar o VirtualBox, Vagrant e gerar a chave privada de acesso ao vagrant.
-		2. Após configurar o Vagrant, entrar na pasta do projeto e executar os comandos:
-			2.1. vagrant up - Esse comando irá criar a máquina linux
-			2.2. vagrant ssh - para acessar a máquina criada no comando acima.
+- Se não tiver uma máquina linux:  
+		1. Seguir os passos desse link [Vagrant como ambiente de Desenvolvimento](https://nandovieira.com.br/usando-o-vagrant-como-ambiente-de-desenvolvimento-no-windows) para instalar o VirtualBox, Vagrant e gerar a chave privada de acesso ao vagrant.  
+		2. Após configurar o Vagrant, entrar na pasta do projeto e executar os comandos:  
+			2.1. vagrant up - Esse comando irá criar a máquina linux  
+			2.2. vagrant ssh - para acessar a máquina criada no comando acima.  
 	
-- Daqui em diante é para maquinas linux
-		1. Instalar o [docker](https://docs.docker.com/engine/install/debian/)
-		2. Instalar o docker-compose -> https://docs.docker.com/compose/install/
+- Daqui em diante é para maquinas linux  
+		1. Instalar o [docker](https://docs.docker.com/engine/install/debian/)  
+		2. Instalar o docker-compose -> https://docs.docker.com/compose/install/  
 	
 - Criando o ambiente em docker com docker-compose  
 		1. Entrar na pasta ..\luizalabs-desafio\config  
@@ -78,5 +78,5 @@ Acessar a documentação em swagger do serviço:
 
 		* http://{ip}:{porta}/desafio/swagger-ui.htm
   
-	O json do postman pode ser acessado na pasta:  
+O json do postman pode ser acessado na pasta:  
 		..\luizalabs-desafio\config\desafioluizalabs.postman_collection.json  
