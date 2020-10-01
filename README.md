@@ -17,7 +17,7 @@ O Redis apenas fiz parte da definição da arquitetura do magento, a configuraç
 	5. [Apagando todo cache do Redis](https://dev.to/sr2ds/apagando-o-cache-do-redis-37b7)  
 
 ### Vagrant
-O Vagrant tinha visto apenas no curso, agora com o handson tive que buscar o conhecimento novamente.
+O Vagrant tinha visto apenas no curso, agora com o handson tive que buscar o conhecimento novamente.  
 	1. [Instalando Vagrant](https://www.vagrantup.com/)  
 	2. [Criando a máquina passando arquivos para ela](https://www.vagrantup.com/docs/provisioning/file.html)  
 	3. [Instalando Docker na imagens criada pelo Vagrant](https://docs.docker.com/engine/install/debian/)  
@@ -25,45 +25,45 @@ O Vagrant tinha visto apenas no curso, agora com o handson tive que buscar o con
 
 ### Docker
 Conheço os conceitos e fiz um curso na minha antiga empresa, porém já não lembrava mais os comandos. Então utilizei os links abaixo para me ajudarem a desenvolver o Desafio.  
-	1. [Docker Compose - configurando redes](https://docs.docker.com/compose/networking/)
-	2. [Instalando Docker na imagens criada pelo Vagrant](https://docs.docker.com/engine/install/debian/)
-	3. [Montando Imagem](https://dzone.com/articles/all-about-hibernate-manytomany-association)
+	1. [Docker Compose - configurando redes](https://docs.docker.com/compose/networking/)  
+	2. [Instalando Docker na imagens criada pelo Vagrant](https://docs.docker.com/engine/install/debian/)  
+	3. [Montando Imagem](https://dzone.com/articles/all-about-hibernate-manytomany-association)  
 
 # Executar aplicação
-	- Se não estiver uma maquina linux:
-		1. Seguir os passos desse link [Vagrant como ambiente de Desenvolvimento](https://nandovieira.com.br/usando-o-vagrant-como-ambiente-de-desenvolvimento-no-windows) para instalar o VirtualBox, Vagrant e gerar a chave privada de acesso ao vagrant.
-		2. Após configurar o Vagrant, entrar na pasta do projeto e executar o comandos:
-			3.1. vagrant up - Esse comando irá criar a máquina linux
-			3.2. vagrant ssh - para acessar a máquina criada no comando acima.
+- Se não estiver uma maquina linux:
+	1. Seguir os passos desse link [Vagrant como ambiente de Desenvolvimento](https://nandovieira.com.br/usando-o-vagrant-como-ambiente-de-desenvolvimento-no-windows) para instalar o VirtualBox, Vagrant e gerar a chave privada de acesso ao vagrant.
+	2. Após configurar o Vagrant, entrar na pasta do projeto e executar o comandos:
+		2.1. vagrant up - Esse comando irá criar a máquina linux
+		2.2. vagrant ssh - para acessar a máquina criada no comando acima.
 	
-	- Daqui em diante é para maquinas linux
-		1. Instalar o [docker](https://docs.docker.com/engine/install/debian/)
-		2. Instalar o docker-compose -> https://docs.docker.com/compose/install/
+- Daqui em diante é para maquinas linux
+	1. Instalar o [docker](https://docs.docker.com/engine/install/debian/)
+	2. Instalar o docker-compose -> https://docs.docker.com/compose/install/
 	
-	- Criando o ambiente em docker com docker-compose  
-		1. Entra na pasta ..\luizalabs-desafio\config  
-		2. Rodar o comando abaixo para criar a imagem  
-			2.1 docker build -f Dockerfile -t img-desafio .  
-			2.2 docker-compose up --remove-orphans  
+- Criando o ambiente em docker com docker-compose  
+	1. Entra na pasta ..\luizalabs-desafio\config  
+	2. Rodar o comando abaixo para criar a imagem  
+		2.1 docker build -f Dockerfile -t img-desafio .  
+		2.2 docker-compose up --remove-orphans  
 	
-	- Caso não queria criar em docker basta criar:  
-		1. Servidor Redis  
-		2. Servidor MySql  
-			2.1 Criar o banco de dado  
-			2.2 Executar os script DDL e DML  
-		3. Alterar os paramentros abaixo para apontar para o servidor de vocês.  
-		  
-		`java -jar desafio.jar -Dspring.profiles.active=prod -Dtoken.seconds.access=120 -Dtoken.seconds.refresh=240 -Dmysql.host=192.168.15.144 -Dmysql.port=3306 -Dmysql.database=desafioluizalabs -Dspring.datasource.username=desafio -Dspring.datasource.password=desafio -Dspring.redis.host=192.168.15.144 -Dspring.redis.port=6379`
+- Caso não queria criar em docker basta criar:  
+	1. Servidor Redis  
+	2. Servidor MySql  
+		2.1 Criar o banco de dado  
+		2.2 Executar os script DDL e DML  
+	3. Alterar os paramentros abaixo para apontar para o servidor de vocês.  
+	  
+	`java -jar desafio.jar -Dspring.profiles.active=prod -Dtoken.seconds.access=120 -Dtoken.seconds.refresh=240 -Dmysql.host=192.168.15.144 -Dmysql.port=3306 -Dmysql.database=desafioluizalabs -Dspring.datasource.username=desafio -Dspring.datasource.password=desafio -Dspring.redis.host=192.168.15.144 -Dspring.redis.port=6379`
 	  
 # Aplicação
 
 ## Autenticação da aplicação
 
-	A autenticação deve ser feita na URL abaixo:  
+A autenticação deve ser feita na URL abaixo:  
 		  
 		* http://{ip}:{porta}/desafio/oauth/token  
 	  
-	Os dados do Authorization: Basic são:  
+Os dados do Authorization: Basic são:  
 		**usuário**: cliente  
 		**senha**: 123  
 	  
@@ -74,8 +74,7 @@ Conheço os conceitos e fiz um curso na minha antiga empresa, porém já não le
 	`--form 'password=123'`
 
 ## Acesso 
-
-	Acessar a documentação em swagger do serviço:  
+Acessar a documentação em swagger do serviço:  
 
 		* http://{ip}:{porta}/desafio/swagger-ui.htm
   
