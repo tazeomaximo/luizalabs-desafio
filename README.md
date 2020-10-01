@@ -35,7 +35,7 @@ Conhecia os conceitos, porém já não lembrava mais os comandos. Então utilize
 			2.1. vagrant up - Esse comando irá criar a máquina linux  
 			2.2. vagrant ssh - para acessar a máquina criada no comando acima.  
 	
-- Daqui em diante é para maquinas linux  
+- Daqui em diante é para máquina linux  
 		1. Instalar o [docker](https://docs.docker.com/engine/install/debian/)  
 		2. Instalar o docker-compose -> https://docs.docker.com/compose/install/  
 	
@@ -46,7 +46,7 @@ Conhecia os conceitos, porém já não lembrava mais os comandos. Então utilize
 		3. Iniciar a aplicação
 			3.1 docker-compose up --remove-orphans  
 	
-- Caso não queria criar em docker basta criar:  
+- Caso não queira criar em docker, basta criar:  
 		1. Servidor Redis  
 		2. Servidor MySql  
 			2.1 Criar o banco de dados  
