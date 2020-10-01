@@ -1,0 +1,631 @@
+{
+	"info": {
+		"_postman_id": "3d677643-81dc-481b-92c8-aae0120349a2",
+		"name": "projetos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastrar Clientes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"e_mail\": \"{{$randomUserName}}@gmail.com\",\r\n    \"name\": \"{{$randomStreetName}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/cliente/",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"cliente",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Clientes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/cliente/?page=1&size=100",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"cliente",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cliente By Id ou E-mail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/cliente/Eurinei@gmail.com",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"cliente",
+						"Eurinei@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Cliente",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : 38,\r\n    \"name\": \"Eurinei Carrão Silva\",\r\n    \"e_mail\" : \"eurinei@gmail.com  \"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/cliente",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"cliente"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "100",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apagar Cliente By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/cliente/2",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"cliente",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Produto",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/produto/?page=2",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"produto",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Produto por Cliente",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/produto/cliente/51?size=99&page=1",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"produto",
+						"cliente",
+						"51"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "99"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Produto por Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/produto/c5dde7c9-f5e8-a1b0-60b9-d4f52d413e04",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"produto",
+						"c5dde7c9-f5e8-a1b0-60b9-d4f52d413e04"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar Produto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ids\" : [ \"e2f8ff7a-5a81-43a3-2089-e5aac4e3e08a\",\"b601a106-8ee9-8e4d-8461-d8404d60bcb9\",\"d0c14b3d-c058-4444-c08f-0c9a9a931801\",\"985c3a0c-1afa-e19d-4bda-efa53e3e622c\",\"862db9f1-2bf8-3061-7306-2b83b66f44b8\",\"3e214eb7-a0c4-db3f-de52-896a80929926\",\"e0ea737d-c5ee-173c-a1e6-17363afb1181\",\"e8341921-a819-8b9e-ed76-cf07df3f58e4\",\"32d4b3ef-0395-cad7-91aa-5c1cc8189334\",\"aa511ee2-7d15-7328-2cdd-ba64c5c45e0c\",\"63b84c90-9022-4877-72cf-a76d3369a1f2\",\"74417ed4-f131-a8c4-ced2-d61e8515491a\",\"cdda4cea-1211-d14e-3d61-e9cfaf3c89ba\",\"52304404-2d7b-9a59-4161-ef241d53f652\",\"a4aa683f-c11a-93c9-bb81-74d7ff2ef19b\",\"988a0012-f494-c7a1-c2bc-0b5ad426f7ee\",\"29f4786d-b998-df79-c303-e9189f4431d1\",\"1693945a-2f15-f6e0-7e79-ee9cfbe50aad\",\"e4dcf727-303d-02ad-4f50-ae2c1c000e7a\",\"fecadada-eb87-793c-e0b0-a90dd07053d7\",\"ec9d5915-7725-a24e-00e7-398425965acf\",\"739aabb5-dcb8-67f9-e664-e32bcef4cbd0\",\"7347c6d0-ba97-58ae-5cc1-cc03ddd28fea\",\"7a9b82f5-7f27-13dc-3f22-bd1622412fec\",\"c5dde7c9-f5e8-a1b0-60b9-d4f52d413e04\",\"a6a1110f-995a-0e24-2000-345dc06bbefc\",\"3f479986-40ae-fd24-cb41-9991886cdef1\",\"65b9f17c-7c3b-98c0-14e1-7297ad222da6\",\"5119c6be-b5b7-d584-1cd7-673d94fb35f2\",\"e4e444d2-81cb-4047-0dde-7541267ac730\",\"649d3cc5-0072-5a18-e5d5-642b33fec5fd\",\"1dbeef2d-79ff-c85c-7120-a61e8d5fb150\",\"689e46c0-2783-ede4-a8aa-59f2d5133fe6\",\"7e23738c-f51c-7e07-416a-314153131d5f\",\"49f172a2-71e7-d775-86e6-35c30ec3f467\",\"949cd25d-a7c4-9321-818f-af4c9df1af44\",\"e0ab9ac5-bd35-7360-e742-8d719dc292f7\",\"534910a4-c5e8-724e-19ba-b4ea20414c19\",\"c8b539d9-fb5d-f917-43b5-184623c6dac1\",\"4c179239-f141-dfb6-23ce-a512c2eff42b\",\"38b066ea-2bbc-1be7-26b3-4833e9561d44\",\"e474448e-9e4f-62ec-69ac-f10c3f477ac8\",\"3300199b-497e-ac84-578c-e01d6d4e3cea\",\"b0ac5fec-bcf6-325f-cb0d-6b3c5df439f6\",\"1b98d011-10a9-0ebb-aa0a-f7e0f2241585\",\"44fe0c6a-4c7b-3f29-4e40-7d4fc4874414\",\"5404400a-cb28-d7f0-dab1-e9ef711b93b6\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/produto/cliente/4",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"produto",
+						"cliente",
+						"4"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "100",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remover Produto",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ids\" : [ \"e2f8ff7a-5a81-43a3-2089-e5aac4e3e08a\",\"b601a106-8ee9-8e4d-8461-d8404d60bcb9\",\"d0c14b3d-c058-4444-c08f-0c9a9a931801\",\"985c3a0c-1afa-e19d-4bda-efa53e3e622c\",\"862db9f1-2bf8-3061-7306-2b83b66f44b8\",\"3e214eb7-a0c4-db3f-de52-896a80929926\",\"e0ea737d-c5ee-173c-a1e6-17363afb1181\",\"e8341921-a819-8b9e-ed76-cf07df3f58e4\",\"32d4b3ef-0395-cad7-91aa-5c1cc8189334\",\"aa511ee2-7d15-7328-2cdd-ba64c5c45e0c\",\"63b84c90-9022-4877-72cf-a76d3369a1f2\",\"74417ed4-f131-a8c4-ced2-d61e8515491a\",\"cdda4cea-1211-d14e-3d61-e9cfaf3c89ba\",\"52304404-2d7b-9a59-4161-ef241d53f652\",\"a4aa683f-c11a-93c9-bb81-74d7ff2ef19b\",\"988a0012-f494-c7a1-c2bc-0b5ad426f7ee\",\"29f4786d-b998-df79-c303-e9189f4431d1\",\"1693945a-2f15-f6e0-7e79-ee9cfbe50aad\",\"e4dcf727-303d-02ad-4f50-ae2c1c000e7a\",\"fecadada-eb87-793c-e0b0-a90dd07053d7\",\"ec9d5915-7725-a24e-00e7-398425965acf\",\"739aabb5-dcb8-67f9-e664-e32bcef4cbd0\",\"7347c6d0-ba97-58ae-5cc1-cc03ddd28fea\",\"7a9b82f5-7f27-13dc-3f22-bd1622412fec\",\"c5dde7c9-f5e8-a1b0-60b9-d4f52d413e04\",\"a6a1110f-995a-0e24-2000-345dc06bbefc\",\"3f479986-40ae-fd24-cb41-9991886cdef1\",\"65b9f17c-7c3b-98c0-14e1-7297ad222da6\",\"5119c6be-b5b7-d584-1cd7-673d94fb35f2\",\"e4e444d2-81cb-4047-0dde-7541267ac730\",\"649d3cc5-0072-5a18-e5d5-642b33fec5fd\",\"1dbeef2d-79ff-c85c-7120-a61e8d5fb150\",\"689e46c0-2783-ede4-a8aa-59f2d5133fe6\",\"7e23738c-f51c-7e07-416a-314153131d5f\",\"49f172a2-71e7-d775-86e6-35c30ec3f467\",\"949cd25d-a7c4-9321-818f-af4c9df1af44\",\"e0ab9ac5-bd35-7360-e742-8d719dc292f7\",\"534910a4-c5e8-724e-19ba-b4ea20414c19\",\"c8b539d9-fb5d-f917-43b5-184623c6dac1\",\"4c179239-f141-dfb6-23ce-a512c2eff42b\",\"38b066ea-2bbc-1be7-26b3-4833e9561d44\",\"e474448e-9e4f-62ec-69ac-f10c3f477ac8\",\"3300199b-497e-ac84-578c-e01d6d4e3cea\",\"b0ac5fec-bcf6-325f-cb0d-6b3c5df439f6\",\"1b98d011-10a9-0ebb-aa0a-f7e0f2241585\",\"44fe0c6a-4c7b-3f29-4e40-7d4fc4874414\",\"5404400a-cb28-d7f0-dab1-e9ef711b93b6\",\"802973c1-af41-4296-f665-427e5606f84d\",\"95e44e39-63f4-e876-9474-b5aac2d68b4c\",\"a66a0cd4-6b3c-e3a6-e4db-29cca6319fd2\",\"3d41d1bf-6cf4-4682-32b1-105e8db055d1\",\"62f53e12-93a2-e157-8406-bc5b3031010f\",\"da91e715-899f-d3c3-7648-9ac9568fbbd9\",\"0e73fac3-58ad-73e1-e829-cf582041cba7\",\"cd721bc3-cbd5-bfe8-2784-7fc9427bded5\",\"d58e5bd6-9b8b-c4b1-2a55-9d8d1094e07b\",\"2a236e6e-c013-62c8-4172-0b1b3d7aed94\",\"12f12ccc-8d0a-a440-bdfa-9ed0b345348e\",\"e557c3fa-97dd-db66-f45e-779cc4e2281e\",\"0304fcd5-a1f3-b4f6-9c60-570884a66684\",\"239f441e-747d-2a88-8bfd-18e41ca5bc2c\",\"4b431f7e-951a-8f99-56c9-bd53706cf894\",\"8d8e06f3-7cbc-34e3-1c28-028da5f82774\",\"b4a78c5a-9c3d-b559-3588-90348f4ade7b\",\"e98212e9-b037-5f23-d3ce-dd158eaf697e\",\"2c5d31ea-b248-9bcb-caed-c6cf15d46488\",\"4b9a1ead-3f1d-9413-8aff-77065888b45e\",\"64f9aa62-f2c8-6af8-9fd7-b66108ce2b27\",\"2efdda02-7a00-d9b6-22f4-9f4f1908949b\",\"b5fec70d-8d1b-c679-dead-fa7466d837fe\",\"06980221-9eea-5bf1-ffa0-b810eed5c537\",\"33a63c42-588a-838f-b98a-5726ca450f99\",\"a5305f82-1980-55dc-b781-0d08149b1fb1\",\"4f4a4935-33e5-57cc-f7d1-2f3cfc5244c5\",\"2705425b-502d-549f-53da-639b74e37b84\",\"255d3f7b-8c53-c11b-db51-3c4a137a8792\",\"ffdeb7f4-dc8a-356b-c20a-c44aedeb8b9c\",\"5f3c2ca7-1e61-1fec-e3fb-744bed5d1fb8\",\"0ecd2794-6f6c-e1d6-6abb-bc4f5cbe21b3\",\"20bbdc70-158c-c795-95f7-0a85b56abbe8\",\"8b94fed3-ff9a-eae6-7f09-fa510d66da55\",\"146bc356-f56a-fd26-b34d-255146d4de6f\",\"d6f01701-821e-4d5e-2df7-f4f02227e348\",\"021466f9-bd59-891b-7f01-3e777a4c32b4\",\"b1fa7e61-90c4-44d5-b2bf-013f6a5a7317\",\"5386e9af-5ddf-3412-4ba9-a8f96820c8c1\",\"ab0cbbc0-907d-118f-9d33-6f7d07305812\",\"8e6bf09c-1d54-a6c7-5348-8f25d8b12b5d\",\"ec4bd9db-6694-cdf1-0787-ab43f5d5315c\",\"a11068cc-d897-c02c-efb6-3129335c960d\",\"317d1c21-a5fb-f078-c7b1-b49e3d636c15\",\"df0d23ff-88e9-a737-24c1-ac724694c609\",\"d773e00b-3f4e-1264-6c5b-fa2072c51a97\",\"7f9fc39d-de09-0571-2743-bcc18f28b7de\",\"f52e0dfb-f608-37da-708d-851b6abb0348\",\"88bc21c8-6588-21d4-1808-f390a688db2c\",\"9119ea98-4eb9-60da-acb0-0402eebac1dc\",\"2bb21e0a-5231-bee6-90ab-169f07539966\",\"d8f2723a-2edb-deb1-6db0-bd6ff00b4347\",\"e01f4dff-cac2-129c-e0fd-e22ec15eabaa\",\"7a60372a-dd49-f794-5cb6-fe3192dad8b1\",\"397bb92c-c82c-9f02-2aff-f15911290942\",\"945718d2-f162-2c2f-c26c-2ba0c0e1f9ea\",\"94a558fa-efc5-2d78-9f57-034d25bc3782\",\"a2d8e51f-14b1-e18f-03f8-8e9c553c6f32\",\"e4b563b0-e64c-418a-93a7-df697c75610d\",\"19d1242c-2d15-6c94-93d7-d43a5938d977\",\"20690876-2c10-aa2f-f901-e7e2f059a438\",\"cac47a2c-d749-082e-f32f-b90176c13920\",\"9517d64d-c51e-7c6b-ff0d-a9e5f09cc77d\",\"08ee7c78-4e5d-7281-b584-e383c499b7de\",\"5a7e4ff0-fc7f-938f-7ea6-8069ee89ad0b\",\"d99dbb61-de89-12cd-4519-631cdf39fb52\",\"e26c369e-2ec0-d588-7750-89b4052f61e3\",\"f392d337-fa5c-7c6c-7447-d5b4e7ea906f\",\"8c33a55a-e6d0-34d6-bf03-8803f237ce21\",\"ef81320c-fe21-d293-1910-237aa5227bf2\",\"ccb4bbfd-940a-d63d-cf2d-16feee9a31e0\",\"362b0179-976a-301f-44fc-6f58a5f4425b\",\"dde0a16b-03a6-d5aa-d41f-6f9c0043361f\",\"3f6666c8-c826-d871-8bba-7aca55eb304e\",\"f4f82ae9-02cb-9abf-0121-78cc17d70f36\",\"1ec86fab-c39a-b5e5-5abc-7d7065296bfc\",\"0a791121-341e-ecc3-9af5-108335f8d6e8\",\"3cb287b2-db3b-9d85-9ee2-8742151c4ad4\",\"a009f1e7-0621-18cd-2cb3-d43adcfa9731\",\"de466dc0-f29d-c99d-f95b-0b24f1a76131\",\"c0261fc0-6934-96f5-4ab2-0a94e7bcea0b\",\"782b5588-61b2-abe6-f0ea-27f6da2db7f4\",\"d4b7f803-0ce9-fb32-f994-86a261270886\",\"323adefa-51cc-c385-962b-6849301640bf\",\"dc4dbc17-85ed-1be1-8c36-824b437a52e8\",\"d6903781-d924-d90e-5789-077f2413c6e1\",\"fcdfd106-c7ac-f005-ea19-e8a66f40950b\",\"4b019807-f635-08e3-03c1-87341c8a5a64\",\"461b73f1-b83b-dcc3-45c1-13fd527266b4\",\"a1bc77c8-a927-6347-cb00-88aa9810bfaa\",\"f5cb3ee8-ba7e-bea3-7cc2-41f017ba5f36\",\"9a6e3b49-dc96-2e3d-ac60-e4902ce60c9c\",\"65e10a61-87a5-2e7f-9866-e686c1d68a05\",\"f43f8b67-40d6-2f55-7d27-ebfd8f65e9a8\",\"7cb956b9-1808-ad7f-703b-9de8239157a2\",\"4a462120-920f-d377-66ef-603bc4926aef\",\"26e3feb1-4f5c-b811-d638-6e6e09cf5903\",\"22c6878e-2590-1dc0-181b-40b46be105e3\",\"52331ca0-4733-54e8-e732-38d692301992\",\"be50d02f-56df-f270-d043-417d4f226468\",\"d632b33b-368e-568c-7e5e-b066a610e502\",\"0e27c764-9313-af7f-bf1d-f1f4df1b20b7\",\"356e1975-4179-cc6d-e5fa-8a50f808ef80\",\"a4769c7c-ace7-3d99-bb47-44034d03114a\",\"8e5b4fb1-c80e-4b38-c327-83ad4815bae7\",\"648fc619-d2ed-c7a5-1389-c0012ccc08a2\",\"d86c0f82-d5f3-c6cd-10ad-b9735e270ccd\",\"f0921137-4ff3-5c3e-3f6b-f273453c0d81\",\"bdb2aab2-84f7-6de5-1b32-509f8d00579d\",\"79cde448-11c3-3f08-18fa-03a03457bcbf\",\"a711c235-a299-27eb-f7fc-72e393fac519\",\"40aa1b7f-a749-677d-8cfe-9ed58895cf3e\",\"fc3e8aca-6b91-835d-a61d-7df434cea969\",\"192d0835-8a2c-f9f9-7ca9-20ed0c54529b\",\"febbb0d0-ab97-7db9-5297-e49ad7da666a\",\"577d2d3e-2205-b7bf-abda-5fe9fb9a2644\",\"e0d9a1a0-3285-2910-28fa-227fec7d3c81\",\"2b90dda0-c003-8c7d-3b57-cd0e475f1165\",\"40d9400c-2f88-faca-fd92-390504cded53\",\"1b6bc259-40b5-e63b-0909-eb7231dd3d9c\",\"f3d8ef85-307d-aec8-3817-26ab146b18e4\",\"f9b31865-3445-0fa2-de4f-ce93b32ceab3\",\"44cc7b8d-1050-3f5e-dce8-a7265fcb2c41\",\"3de393e8-8da8-a75d-d714-94ab0cafa16b\",\"694ea8e8-82a3-e00f-dadc-d0b7c7e1d863\",\"baa68be4-11d5-15f1-c3af-582fc5abb820\",\"9a09fc36-6568-4210-375e-4844ec48c8af\",\"3ebf3744-8ac1-2a0f-d1a6-9d739f761453\",\"37940ea8-e0eb-65d1-1730-dd2fee98e70b\",\"df7591a8-1d2a-aac0-bb6a-607bdbc65412\",\"0ab37612-98bd-b137-d599-45153899fbf0\",\"193c0db5-04d4-584c-7b1f-3ad22ac19345\",\"28fd541c-91d8-7231-4555-187ec5696b90\",\"2db7e480-5b3a-7ca2-cf3d-8909c423c486\",\"66b67794-7b24-02b1-e92d-03bd84794b7d\",\"d83dcc56-3a39-8db9-bf96-9cafb0707c5b\",\"856a845f-07b2-a191-3588-517d744409a9\",\"7a60d0c2-93cd-02ff-d952-97953bcb6277\",\"7ea67309-b456-9f22-cc0e-e92589fc7c31\",\"2e9ae4c2-dce1-404d-49c8-6f69b58f6440\",\"2f29beab-50b9-124f-1fd2-884c313595b7\",\"f97d8205-a2e3-a848-57d5-2082608e1103\",\"f30f44d9-532c-2fb1-a91f-95e7ed3e4469\",\"0fe053cb-cfcd-f5f4-67c9-f9bc43b5a057\",\"72516935-23f2-236c-f6b1-8b8425f44956\",\"b08f3e93-6c36-6ac4-4f47-946f7ce03d92\",\"52792d84-2b7d-9af0-2caa-76824ecd01b2\",\"1a1b11a5-34c3-161a-0f88-9eba252a12fc\",\"a87e7d06-b3e9-2733-cf91-806b01ae40e4\",\"c1fb2e88-3585-4793-0027-4204f5065b0c\",\"29f6a125-6343-bfd2-f1b7-9f3c21e9b173\",\"05acf779-f400-1254-697e-d3ebeb68218d\",\"b55b72dd-c532-00af-4429-8fa400444aab\", \"041efe73-8419-9897-62e4-363947523652\",\"ae9a7e88-a568-eb8b-d60c-71f974879f1e\",\"c8346207-cc12-3b51-daab-041663b24888\",\"b81475e2-b031-2a7d-55ec-6123329154dc\",\"80a084d3-8af7-9f90-1989-2f518c1893f6\",\"28d2b29d-0ee5-fbf1-f5da-ced83f2f73e6\",\"6e08f244-29d3-dde4-04a0-44f78e299eaa\",\"fbab6025-d1ee-5dbd-4ffe-a3429abbf6f6\",\"bd16c0c7-87d0-9f52-7e79-94d0db205ad4\",\"d4aeca6a-027d-acfe-5059-b200246bc82b\",\"b8d3f4a0-0e81-c33e-62c8-665a2bdfb73f\",\"4ab9ce9d-d721-9926-6b55-18eaf0d61296\",\"7b90f783-f84c-b319-a2b7-185e62113268\",\"84673cc1-7714-a2fe-ec7a-af5b915e2dcd\",\"d0a5faa2-49f9-98a0-e98c-6ac9d9d87491\",\"c304142b-5829-6b55-1b6a-e74ec5936cca\",\"eac2a2b2-a71b-0eeb-26d0-51002d200fae\",\"ace5f7d2-61b9-d8d8-f6e8-0b154bb77fc0\",\"f151ac04-71e6-9bca-6950-8c7f4e15f709\",\"96cef923-be6b-ba7e-a9f0-291f45377335\",\"5236c740-1873-48d1-2ed6-36e17c92dd40\",\"3ff7a2bb-f722-a679-46c8-cd4bbff28e82\",\"17735b6b-f349-fe7a-5fdb-aba7fff1be19\",\"65e0849f-60be-ac45-3909-f1a56438a75b\",\"f988d440-50a3-615b-a999-8dbf2884bc01\",\"c6131630-d3f7-f204-2665-a99af08772de\",\"0b23fcd8-e465-8ee4-503d-401d5bcd1e22\",\"80dfd8a8-ec50-0400-70a5-0debfc9424f3\",\"41c55e16-2562-afcc-5ac1-c9484a7f380a\",\"74c79b9b-2f0b-7050-4d52-01b46456bac5\",\"81367f0a-4cc0-3500-17a9-e378491a592d\",\"2dcf8a8e-7148-ed46-4662-07699cfcc9b7\",\"68231f2f-3bf8-1468-8b4d-0e8224b737d8\",\"87566605-3bad-b426-3619-667419b143d2\",\"fdac7ae8-720b-81f7-398a-cf1c267979fb\",\"0f8d97e5-f4dc-486e-9132-f92d21f8141a\",\"a95f693b-20e8-7e78-13c5-881708ea2a4f\",\"dbdeac7f-6ddf-c490-6c1e-5a47234e6f18\",\"fa1fef05-c47f-2bca-f848-092c0ae2126c\",\"16428d05-84bf-a695-d9a1-ef9446a682a9\",\"6682fbb8-a2e1-2ce6-6682-16f39418fb6b\",\"c04b8367-c851-c9f8-eb81-6b1243e24c79\",\"69b7ff53-dc5b-bd67-4269-90bfc6aba58c\",\"b9ebb4d8-52f8-9696-bd13-2bb2345576c9\",\"ffba1c24-a7f1-1e12-d85c-62ccd4ec7154\",\"6ce91c4d-b01f-b5df-e90b-4913cbc78a4a\",\"36115757-1f85-f4b0-96c8-401ca77500ee\",\"9a3cf1d9-1ae1-4da6-16e9-42d196201244\",\"8e89c055-d981-81d1-cd35-d73486b638d7\",\"6fe4bfc6-2245-3a65-3518-f5d0801ade0f\",\"94973be5-ea82-5fe8-27c2-d34c1856bb68\",\"a5ad0548-2f8b-e42f-fbe8-0eb04bbbdca3\",\"c87d6e12-2f1e-fa08-7df2-1e32df174024\",\"53f286da-fe4e-b057-0af4-fc61e10476e6\",\"ba9459b6-eb81-973e-d1fa-5caeb195efe2\",\"8f0653c4-c55b-621c-5065-d378e66c919f\",\"9fa33a3a-5450-9c40-f8a0-5d66043a4251\",\"ee79af4d-ebe2-82f5-03ef-934fcc87c817\",\"59653143-5456-7e74-3795-0e99ab959b0a\",\"c80c23df-a16a-f23a-71ee-d2be150d0ad8\",\"3e4a0a56-7dca-507d-ebc4-3cb4e5fe75dc\",\"5dc80fc0-72cc-e1f5-2dff-71721375629f\",\"4628e3a4-b5a8-5bda-aafb-ceb7853289d9\",\"8e00e054-51cc-9f13-d1ad-d650a4fa3ec9\",\"ceae02dc-1d39-f496-0fa2-1e3c035fc2e3\",\"5eb47341-9925-aed9-e3c1-e7400d60d596\",\"47a22d34-1369-a377-fe88-ee3fd2ee95a5\",\"5befba65-4f61-6daf-c57e-82c96dbee926\",\"07a3b6d2-4541-157f-3245-79af35974fe4\",\"4f43e7a9-c139-a721-82a4-ef04e377e2db\",\"b8bbed07-2bce-9ab6-ab8b-aa9139c963a9\",\"18d71035-8e4d-622e-6471-296ee20dfe27\",\"2c6d2054-2375-a90d-c3b6-0ffad490d3a7\",\"0ccf1f15-eda5-233d-097d-8d9deea95a57\",\"a86c3530-ee26-ef87-0dbf-38b52a2806d5\",\"11a65d65-ce10-e61e-6b21-3bd6e5598c07\",\"77d9004f-1177-3a4f-a1f3-b4979cfda81b\",\"66f4417d-53e1-9358-b323-baf7d06b098a\",\"fb494577-6b79-89a8-25d6-e6255fd5cdcc\",\"f2c8de27-532e-f62f-10bd-48a5e94d4ee5\",\"b7c903e3-312b-6a4d-e606-ab24288192c5\",\"b1984130-2bbb-3b10-aa6e-dd52f78fa43d\",\"ae992748-e285-53ab-8fcf-39d3b82fa70e\",\"b938154a-a1d7-6c1f-54c7-8cb2d24f6c30\",\"24433b6e-214d-7905-01a9-8645336221b7\",\"3e20bfa3-cd2a-9d7c-7042-76c3f06a5594\",\"72d5f25b-0ed1-5e5f-5e9d-20e6934abc83\",\"fceb55db-9fe4-f9a4-ef96-dab110cf54f1\",\"5e8517de-69a0-4e34-45d5-7f35cb010303\",\"645c1ce4-7aa5-6399-2252-5283915d293e\",\"6af47131-5281-02b0-aa8c-14a4d28c0770\",\"ab90053c-e12d-e3b4-3d7e-e3c566a2f7d0\",\"a00b336d-7ad2-5847-1b6f-cbf5ca95720a\",\"4ac80d6b-59ed-3901-f691-be8f8cb44aa7\",\"f02e15be-3688-6f58-a3ab-ef681cc0b5d5\",\"fae46e0b-2a95-79fa-b568-9629da495a7a\",\"272236d7-7d8e-729f-3249-5d0a2264ecf5\",\"986a80a4-e6c0-dcaf-94b2-3c072dd03d1f\",\"74335b4a-4bd6-67ec-71ce-6fa5922f7003\",\"82906a76-9f5b-b5a8-8141-d7809c86f98d\", \"8aa791a6-1711-e64e-bf58-f2b771d61f25\",\"73999f5a-9ff0-766b-1a92-47a612bb4da5\",\"07b50369-f988-ae94-5a9c-5d5829bb0230\",\"019169a3-7ebc-2de2-4a9c-13c41e5c4a9d\",\"6537012e-6fa3-a266-071d-4a0df7a53370\",\"4e5bebbd-0461-1459-b4fd-987f56fb416e\",\"96658f49-7f95-0a58-d79f-526802308392\",\"036e3483-7630-25ac-e387-3cfaccbf1ac2\",\"5d39c11d-63e0-5545-4980-f75df2a6d28e\",\"8d7bf7b1-00fb-603f-ff59-63a00f2c969b\",\"8df5db22-5fb1-888f-9df0-cfc0935c55f6\",\"a5236d6f-1726-917c-458a-107dafa787d8\",\"33a33f2f-556b-1b40-1166-5a760e2f2e02\",\"6ac26bf9-a0a6-7188-a857-12106aea5d6e\",\"741012b8-7b8e-038e-ac15-eb9e1d20ae27\",\"4b950cc2-362c-5f78-3c57-0ab882609839\",\"d691f488-69d1-2854-58da-453c6c8f801e\",\"15ca58c7-c211-43ac-1eda-06b92133d7f6\",\"084ea486-87d9-23ae-fb84-4203a95f77a9\",\"3645a188-95fc-23f1-6a00-10d472f7b65e\",\"502ddfa7-38ef-9662-9fcd-d28669e042e7\",\"8f06eb8a-7acc-129b-26f5-33093a6c325e\",\"8db06eb8-bc9b-9008-ab74-fbdf752e47cc\",\"b24c9a6f-cb35-65a0-9f39-cb5873113305\",\"c4fa537f-c97c-41db-dcf3-d4723777fe42\",\"b949fcae-e69c-13f8-ab8f-859ab356477a\",\"32bec9d2-6b3a-4242-f65b-6e5e394e5f69\",\"88df7fbf-efdc-bd69-a6e2-6fc3212704cc\",\"71b516dd-8d2a-c161-3250-4589729b741e\",\"0b3ed108-8042-26ce-cbf0-16538423d6d1\",\"b3508e49-b0ba-be47-253d-c39045ec2c87\",\"d293846b-000e-633c-3fb4-c29073293a73\",\"8e3b6cc4-f92a-2325-7059-bb171a1fb9d8\",\"7ef01241-7b5b-feee-76a6-3af179780251\",\"1226108b-995f-f573-a1f0-04ebc4be42e7\",\"f4210e24-fedc-a441-2d6f-6ee4e83a46be\",\"8509a843-ce9a-5e6f-c850-f5f8f52358ba\",\"fb5b18f5-be63-c1a6-7755-4dad5560210b\",\"c39ffa78-aa47-3106-8f25-353e6f018729\",\"7cca2cef-a4f3-8e93-c4cb-77d9cbecd190\",\"f1155d97-7431-0afe-026b-23f6f302fab2\",\"d61d0c07-f3f0-aa48-eb10-308a24a98d16\",\"c35ce6cf-b67a-01d3-911f-fcb442852a58\",\"cc0f078c-2c46-e4ab-23d3-00efcf7fb262\",\"4ca91e65-0dcf-8696-d3c6-5447ad51bae5\",\"36435934-0910-20e1-3fe5-d8ade0b582fc\",\"6d2a8fef-bc94-97ce-51d2-0baea25f7333\",\"b3f2e52c-03d3-3029-ba44-71edfb1ff50a\",\"dd20044e-1411-4a37-946a-b319ae31f7ab\",\"31a36d96-6b27-4c66-d450-acbd16b52a6f\",\"2887908d-10e2-87ba-a09c-aa3610dfe560\",\"4f88dea8-5012-8fa8-c8f8-2f9698b9a005\",\"4fab5ddf-b403-71a1-3b53-8d782aea47a3\",\"61792007-a3a6-0f1e-0245-99d60cd3d8a2\",\"a8ce8991-ee9d-7f9a-f449-e0cb76038e57\",\"fc250f23-53d1-8d2b-6271-8ac9c889d8fa\",\"80eadede-327d-0eb7-aea5-04faa7c07d39\",\"19ef210d-903a-bd8d-2156-caaa9bfdf799\",\"43bdc2dd-b2a1-3e23-0017-e64f79488548\",\"b9b68b17-cdae-10a6-f8e5-ec1e7d1c7310\",\"82f390cb-9a0f-9adf-fc3b-9e500c2378af\",\"61bacf55-0e50-88eb-3f34-07ceedd4102d\",\"75dca102-38aa-51d7-ff34-62a1efcb320d\",\"ca18687b-7847-51c8-c273-bae589ec2bb6\",\"67405192-0a9f-2f72-04ca-ed315dde9d31\",\"32b1208b-0044-c290-5aa5-06767aa24d12\",\"0eefc590-b56e-e316-9e25-6c83f240d1ae\",\"13fffa63-47a8-1f7a-6131-a965cf7c496d\",\"2b2f6f15-970b-d063-1d5d-c31c6891e66f\",\"f8fae3c0-7fb0-3bfd-6bb7-bc51e8fe2e47\",\"31e3b3cc-94f7-6cce-7c67-19e39b097952\",\"7d082936-643f-b61a-af01-170197590793\",\"779d0d98-098d-fce7-56ed-39ccd6bb0c58\",\"92d73261-7a03-3707-7daf-070a3364eaa4\",\"1589ab4c-aafa-5523-389d-a3d2038af310\",\"ab9ab875-deb7-9902-b908-3c953fdf0482\",\"2e221049-4da8-c837-5bee-e2380b28194c\",\"c0b8f43d-a3a1-7762-02dc-c6aa523b567b\",\"64e75e7e-6167-39cd-98ac-f9a8c4a56a94\",\"1e61d79b-d27c-5673-9de2-30f57ab17b3c\",\"49c30f97-e2e7-97d8-5554-1b8e136e47bb\",\"38efa5d0-b189-81ee-2334-d9c3c83553c3\",\"c4c62c2a-2316-8689-1fa4-17be6912a62e\",\"976c3089-c71f-741a-f22c-0da00fa782a9\",\"c6f25e52-8d2e-fdaf-a7ac-996178fef0f7\",\"53730e8a-4881-7b55-179e-be9c0cec096c\",\"87b041b2-4405-1d82-fe5c-743f517a7d19\",\"ffc5ac38-7f09-444b-7c23-69d4eb3e89c5\",\"501655e6-52b1-417f-befd-99908106b7a1\",\"5bae9f36-5b52-344c-f480-b0abbc4e3259\",\"4878fea3-e523-eeb6-a23d-f859bc0b9921\",\"0a2f217d-bb1c-917d-cca2-40c33df3867f\",\"31fbdce9-90e0-cfec-a368-873d94525381\",\"6cd9eb34-485b-9095-9aef-04fe6e93b8ca\",\"259fc79f-6cbd-67d4-e40f-ac28818810c9\",\"bbcf1857-4d99-ec73-645b-85b9f43dddf2\",\"22645e42-7799-4c77-cda6-e5b296caaf66\",\"d1b1c098-06d9-1e74-287e-39599ca29acb\",\"39956798-a5d9-8ae0-d57d-40715301d6f5\",\"a60a1f75-4400-fac0-5c06-45700462f810\", \"e9f0e469-d95e-6d4e-3f8d-1668d03565f5\",\"95708c94-7fa2-8f63-52ed-84090a1e26c1\",\"646f732d-5e41-7f53-b00c-cab3b3c0a647\",\"18276e19-4f56-c14f-4ab1-e186f9182ae6\",\"4097c9b9-f5e8-fd8d-5a4e-816321a2f1a9\",\"250cf29d-2c1c-3871-3ac0-5c84d2f8414a\",\"6952cb2e-aea3-2880-318e-f0f9e8ca64c6\",\"46f92880-d122-1b59-94e6-4decab0c3676\",\"bb8a1f13-99e7-7ad5-659b-d895c378573a\",\"abffe0cf-e1a6-abca-aee6-e0ff255625e1\",\"15bd37e7-6a86-3d3d-1efd-5758548cfbf4\",\"15ddc490-1e29-5d79-e0fb-001690fb8735\",\"fffee321-7e9e-f291-3541-befcc03abe5f\",\"080505d8-029a-52c6-e96b-614d0977e3e5\",\"785e4978-6006-f52b-f65b-16e78a0e1339\",\"2692dcb1-05fc-e3c2-f8a5-780ea75c509d\",\"fc01b190-82ca-e95e-1eae-c3de0f9ea40a\",\"369a4970-d57d-ea1e-6069-1863acfd4b8c\",\"6926b607-65e3-3dc2-36ed-316fa97746f0\",\"b1ea83a4-eb9b-209c-7ade-15e84299b7a4\",\"781ee7f0-ba5f-e83a-5615-96e101d6de26\",\"a9176dca-2f66-0c4e-daff-69804154bd39\",\"181d6540-2cb4-1656-9198-7b16831edecf\",\"24e75d44-847c-82d2-64d1-d21ca282cdcb\",\"b6cb915f-c325-9275-ddac-1328c320f363\",\"b48c2a5a-47b2-5d82-2c97-062a2a6f5d49\",\"6e9b7f67-76b1-e35b-46bb-1b83046a1773\",\"6316de7e-6135-b801-3d83-020f77c5c982\",\"0bc02b37-7b33-6016-1aea-efa4827f8f9b\",\"9a6b7003-6a89-c018-6917-c16ebc5ff02a\",\"d094006f-fa85-476e-b848-31756e87d259\",\"4122d12b-0b50-343e-42de-80e9546b52ca\",\"619512c5-d007-a039-f47b-7b3b6c26dd01\",\"a00e2ac0-42bf-ab84-b7ed-79fc84ed9591\",\"93cb8610-9409-dce4-65f7-137167019a56\",\"cb7ed87d-fb7b-c05e-d66f-77fde9e57e3a\",\"10a7ba32-57f1-f07c-3e47-414918e8cc51\",\"0d254fb1-7a5b-d33e-1d05-fb62b28ff64b\",\"751e8f34-ea9f-ad5a-eb25-f27c514ddb51\",\"64e7600c-0fd5-cc60-e3f3-1a8d4e8975cc\",\"9f30c68b-4cd0-d1ae-a85c-3cc2f7fa0bdc\",\"5212759c-1f96-86f5-5e61-baa9dd5bc506\",\"3d2f3c9e-8592-a6e7-332b-52dca5930044\",\"c866049d-c79e-3db4-8695-ed987d9f0b69\",\"a0b884d7-7a09-dd55-fb16-d3f8abf47828\",\"4b518b4d-9c4d-465c-d1b9-3f39aa03b792\",\"d0bad929-5403-1ff0-473f-55782a306ff8\",\"800ccc67-8e3b-92b2-55df-07a2485cc070\",\"6db4479d-9c1f-1ad5-42a4-70c7c91d1066\",\"88cd4285-c29e-09f1-33b5-9a46f5d7bb5d\",\"7bb153aa-fa67-60ec-9ef9-f843a5a5279e\",\"2b1bb2eb-0cbe-c3c2-bde1-2d08e2d3db8c\",\"d8ceef81-139c-5dc8-4b1b-6fdbf19675a0\",\"94c2e999-c599-8bb0-eaad-cfb75d9d8d6e\",\"9bf302a3-89c7-6d28-a2ae-cbc862b02303\",\"3e19d99a-dedf-746e-5538-33eebe195194\",\"a45a4bae-0dfa-c1ac-f23b-6469438bf677\",\"b8c796f8-3758-f2ad-ed71-9fd794906e38\",\"77350290-c382-6a05-ed77-fe251ca66d0b\",\"d4dd8b25-6bee-aea7-c431-3123dfd2c50d\",\"bf896843-0f1c-58f5-1597-a5b3c0769242\",\"2ab848a2-8060-0119-70ff-2f30fdd1ac81\",\"9bc9f48f-9dd1-1abd-0c19-41068c6bf8e6\",\"6d558fa4-17f8-ade1-d702-521203d9157a\",\"7de0b041-15f8-2c41-b93b-75961f3ec15d\",\"1eec8a9a-2fc8-5463-4f80-b877c97a6cc0\",\"f8eca7c9-a8e3-707b-cd32-5448dabc1a41\",\"16d9362d-cc00-6e91-8322-0d9f27ded4e9\",\"4c152bd7-fd53-90da-ef2c-a6a6f60d03d2\",\"7a7bd59b-6756-04bb-a7a4-f1d05fcd943d\",\"09afe574-d9eb-729e-71bb-a7555b33fffc\",\"894aa0c3-988a-3f6d-4cff-828478450239\",\"8c595632-a998-6656-ef80-894c58bebecd\",\"71b060b8-29bf-1f83-7d5b-0a92f2e1df87\",\"cfe18ba7-80bb-ad64-30b6-58e9a49ca5a3\",\"df3b7500-5e1d-843c-658f-af5b755aae24\",\"6a3a94ec-c247-5c61-a572-1f6c45b6bc9b\",\"1cb20786-301e-355c-adbd-599a82e32c8d\",\"32967b4e-a421-358b-2a83-0f6b651e8d50\",\"aea55220-febe-50bc-bc54-15232bd49668\",\"67310f11-343c-aab1-95ee-d35155551a41\",\"59270557-a906-202b-1c86-ce96a512381a\",\"74905b77-d990-8772-eb3b-38e681e4ee17\",\"49ca5fcc-b9e1-a8e3-698c-2dd39d6ec7f7\",\"89cba93f-b945-28e0-0c37-e9a14207b995\",\"b654b03e-2c23-e564-dcd6-d01926a65714\",\"cf1082c1-0de4-0bda-c0bd-40ef237317a5\",\"b785f834-1bed-e282-511d-1600069610b8\",\"d93caaf8-b7fa-7480-a651-08029097f7ca\",\"d67b9992-e821-4e02-b86b-cbd0eb5423fa\",\"5fcf4e80-754b-c879-07a3-5ddbf63fe672\",\"ca2ec20f-4e1d-568a-d2d4-7f9aa54a87fa\",\"d10fdcad-9db2-df69-d6ab-30413654f234\",\"d97c7026-4014-49f2-4be4-f8f6be600a8b\",\"3f2f127a-1866-7c0c-cbc2-d56848cc6be9\",\"02f3e16c-2acd-afa0-9af1-7163383d5516\",\"ce6c062b-1382-7b4e-d5a1-283f90d6efad\",\"4cfa30f2-b43c-054d-248c-3be8380cf056\",\"aab6a2a6-b949-5ef0-bc58-ce5ff0bec33e\",\"b89cde14-5c49-17cc-1e64-3983ade62f14\", \"8ad272dc-33f3-b8f2-8bff-dbc16c70f206\",\"6c96aa59-a006-0efa-c306-72e57ebd3e57\",\"30028b8a-aa89-6254-18a4-8e726858f8ed\",\"2782b310-36c9-6f90-55bf-f0114c4cace7\",\"63e36ed1-071b-67f0-d47f-ea81c483a721\",\"2f1b8982-7110-5bcb-9464-ee7cb90b2bc1\",\"91f410bd-06db-b4a2-adf8-213668246607\",\"f11ef615-8d51-b4f4-df52-4bb6bff08289\",\"1d338c29-0fbf-7cb0-9070-67481d3d087b\",\"46385d5f-a324-6534-d616-107b51c08af9\",\"cba44beb-f7a0-fdfe-0fe8-1cc7f9630e04\",\"157652e6-e02e-5aed-c9a7-2821689f0757\",\"ef5a5199-5f4b-6239-476c-314fd6538381\",\"23fb9fad-aefb-5990-3276-7f5f24d55360\",\"ad0f57e3-9765-9de6-c976-5c4dbba80fe3\",\"182ce776-5b2c-6e2d-366e-36b8e8f79814\",\"36210fb8-ec14-8940-f16a-7137c9d2af6a\",\"61aa12f0-a8c8-9f01-3540-15145e2e8fb5\",\"5fbf4e28-9e41-c499-6f5b-71282c1ff7dd\",\"6892f983-35ff-ea44-c434-5aeec97dca73\",\"dac21a95-807c-4996-ee37-be253ee3809d\",\"a4e1b86a-8965-6a59-a15e-8b7031932ac7\",\"f34fe06f-9c58-7521-7755-3f6aea42ee5e\",\"21657f93-ec17-4ead-b664-367a14e1d212\",\"b88cb479-0f2e-0e8b-8870-e900a4642c36\",\"29a09f4c-2b5e-695e-da78-789260ce4667\",\"73eb36b3-0327-c8b7-6ed8-2bf52feaa2be\",\"8dcdb577-2a88-639d-40a2-4f084e7bd1d8\",\"4a45c138-dc9f-30c2-3316-a4024434dd2a\",\"714d4fc4-f006-e41a-0380-f3fe1c313e97\",\"532b3669-302b-1ae4-d3d8-ae83278c8151\",\"70923d98-23be-9193-0a0a-5855a4f886b6\",\"99932356-9969-f44d-1250-533266f6d6c1\",\"f0627358-f2f7-6a24-2220-1fb468ad151c\",\"5eba9b40-dec9-1a4a-664e-2c18679172f0\",\"c6402c9f-29c9-283d-40e7-acfb4a4e85d4\",\"15447d7a-8b3f-af2d-9509-ab05d4e66add\",\"5245b256-dc6d-a0f4-dd69-13893fec9fef\",\"b76a1044-510b-7a47-0731-e9deef83e7ef\",\"1b5476bd-d5e4-07ff-336c-0c5f3555c37a\",\"d888c4f4-9376-8c2a-bf85-4a9e43ff05f2\",\"5cf8712c-299c-006b-0fd5-9b81fb45eef2\",\"8e0579be-ff8d-78b3-66ff-904323394302\",\"0e28113a-dd40-663a-37c9-ed20d7507d39\",\"53b1c0b4-3d40-db26-0f05-138da27eccdd\",\"57d9f7ea-b749-0e1d-ad4e-2d61552b8cd3\",\"2f23ece1-639f-ca90-fa9c-cbd0cb720e3c\",\"2385f5aa-7534-4fad-0e4d-9d318b45bab2\",\"ae33ba17-6800-fb7c-22a3-880d8ff736cf\",\"e55e729c-72a1-1908-088b-c13b76041c50\",\"fa92febb-bf4f-6114-126d-54085bfa2601\",\"a9b3df34-8bcc-4348-7ec0-aba6524a1a27\",\"29e8cbb8-2270-ff40-01c6-a1582c096112\",\"4c727f74-2d17-de86-1c7b-a0861290115c\",\"8ead8a60-b78e-dee8-6d2b-14b0e43f9f60\",\"c379631c-5ca0-b0b9-bbdd-517d06a07c8c\",\"9b711f33-75e5-eb8f-7349-ade7af1559b5\",\"83923d85-2c96-6df5-e169-565c8a5a09fc\",\"9416d179-7a44-c160-1a1a-1ef3bab6b1f2\",\"982695dc-8cd7-de8b-6514-a82ef25a30d1\",\"3c416304-92fe-33dc-d907-752ad9fe2ab7\",\"a7236ba7-d634-8387-da66-6a060cbc221e\",\"00068f53-c4a1-5263-97f2-98594b6604bd\",\"7278381f-ee8d-2f87-de98-7ec5e26efd20\",\"2135872f-9bfc-cbca-cff9-5faee3910d53\",\"99b7a9e9-678f-b9cd-23cc-32b6e7e93b75\",\"876c718c-4d53-cacf-a79c-292e4919457b\",\"237e3dea-d389-b80c-1d3d-57467299c308\",\"4cebe62a-c6d1-41d5-211f-0bed648982a0\",\"b8dd8356-8e35-d4d9-060d-5f0e9e2ebaa4\",\"dcda42fc-8bea-9dd6-81bb-4a2729132987\",\"796bd8a9-0fa4-fa91-c092-9ba261206cf3\",\"d7cbcb0e-fbca-1d18-4855-ed88ff385f6a\",\"438aceab-dcca-c9e3-3f81-ef64d0f48b97\",\"213180cb-d687-79a1-a8ad-13f989824b9b\",\"41db8ddb-f43a-d473-a882-3d0db2d7712c\",\"6a044b16-93c2-9b14-d542-fede15977806\",\"27d171f9-01a3-6114-da2a-ba3aae7268cf\",\"90e6ccbf-a57d-a491-ab84-33e20df63632\",\"fd9aebf7-1529-27d5-f5c9-4e083bd90b55\",\"85ebd168-3454-0316-7b73-5a5ca6da311f\",\"c1c6eabf-8a33-b629-b765-be3d8e8e7ddb\",\"6b7f616e-6870-633b-d3b5-3048874dc445\",\"a4d6fc3c-cbe8-e9d7-20fe-c1ede6d111a9\",\"cb691672-0c56-9bd0-7e14-37a63384037f\",\"75c62fe5-d739-0a54-b73c-b3b79c2a320b\",\"c7f9c4fb-d0e5-408c-49a1-be9d84565695\",\"a52589ed-7f82-7eb8-d437-16b7c8c76067\",\"aa3ec6ab-3452-510c-9299-724e49aa9ad0\",\"5f60d2e8-2620-194d-426f-5e15a415a4c5\",\"f4779407-50cd-83dc-9bdf-0e0d217bcc03\",\"9e80a7ed-5dc5-b5dc-e6aa-f3e324e6f116\",\"8ef9842b-4c0f-e564-a718-bb3da42934f2\",\"bb4e6cbb-e8f1-4512-5cd1-621bef32e838\",\"7add957b-c1dc-5086-8a82-555becfef63c\",\"cc2942dd-6be8-6a47-a1d6-ce9a0f0fcec1\",\"dbe73734-2f7c-c155-0150-82a679778913\",\"6dca4f51-a76f-6151-735c-951a35bbd6ad\",\"582b4ca4-3c8c-40d0-35c9-504ec9e53341\",\"e6d42b0e-4e56-6e85-28c7-e82bfc9f6654\", \"dfcc20d2-bb40-ea18-433b-f1cd7b048d3a\",\"e0081b33-0fb5-5cae-aa52-be00d8c3ec36\",\"20738b7e-4d07-5a50-6f54-9fec6fb1aa00\",\"7fdf4f14-5160-8efb-a4d0-efe3aa1ea309\",\"5bda5219-d37b-7775-db1d-5bbdf833ecb1\",\"3441e3ac-5d8d-8f02-b4b2-4e379d912a0e\",\"4199853e-23de-95d4-36ed-1145c379ee7a\",\"57cbe35b-4e01-2c6e-fa16-39b7064c13ac\",\"bb52afcf-45f5-6c21-b262-526fbb8d9407\",\"0e169b26-bc67-141a-c613-653b3602e8b9\",\"2c61c4ee-da7f-35b5-1b5f-e2ea4442d55b\",\"cc6bf238-1fd9-ea78-1059-ea89d68aa4c3\",\"6254542e-f8de-1006-4b97-0ac2a61a9694\",\"b925234f-d63f-8a4e-0d10-bd85deaba68c\",\"75ef1145-54cc-53bf-f2ab-9ee4601495c9\",\"f503920d-18bb-db42-eb63-ee6182452c0e\",\"4e09b1d4-3255-b346-e243-9ff23a37e2f6\",\"d77209e6-dcd6-166c-ff5f-cfb045fbed76\",\"ed8f4464-5c51-526b-4312-291396d785d2\",\"1646cf2b-566a-fa29-d0a8-de1d6a1528d1\",\"9c286e80-4c80-32a7-05c2-1844c2a9b385\",\"bab6332b-40b0-3460-b228-52258782f667\",\"cd7c9a4f-fe06-7064-87df-db8cd843cbfc\",\"82443a28-89ba-7568-f5d4-85c446e5c50d\",\"a8ef10f1-b728-4c0e-b66e-088f2b5ced7a\",\"c9a5e004-985d-dfab-cfbb-72fb183d2cb3\",\"21928616-db89-afe7-19ae-b3288f4b417a\",\"8b80a731-368b-a0c9-2228-1a92a6f4873a\",\"39f4a112-40d2-0357-265a-cb854349b6ee\",\"f1dd9673-425a-2647-2322-fb9e18af337d\",\"ab939f6f-ea14-c986-ef5a-38ced11b243b\",\"fa850699-0c5c-73b8-ab00-5a4377b1efe1\",\"bcee0d44-2cb3-0a0a-8dd6-605703997158\",\"880fdd8b-7819-1d3b-1321-1cc4a5e62f56\",\"69c47f62-4280-466f-1130-f43dc93fa48f\",\"a2d1f776-3dbb-897d-1c9c-bcf3baad1022\",\"3169ef95-bad3-fbdc-77c3-2e0bb44a1cf3\",\"c28ccc11-493c-6fee-31f6-666bb5b77174\",\"8a084486-6340-7fda-250a-14b7e33abbdb\",\"8610f5e4-3f02-41a7-119c-bc6af5cb1a41\",\"4384a45d-9522-9425-76bd-8c89619375de\",\"7f1705ab-09e0-f63f-9594-40b83399e5a3\",\"4ec32994-3db1-01a9-f579-c7e485fc773b\",\"224384f2-115c-a1a7-6316-554cc84c93f3\",\"d7a107f3-7405-0f71-caa8-c42414953874\",\"2476c4aa-ec4f-a27c-91e5-6c865e2c91f7\",\"12c19a6e-2d21-1459-2b8e-8f9bbb15cbc5\",\"678d8c00-43d2-bbf8-0ef9-02035f048a69\",\"c6320c73-67b5-3d56-5342-acf956b39381\",\"0269ddfc-3e91-55e1-9389-c310d7c5e9f5\",\"e8d54510-080f-5043-06b5-b57e0d2ad340\",\"f077b537-015b-ba9d-1582-3752e689e988\",\"5df76445-9ef7-9e9c-dc3b-224812b04a95\",\"f56b0dd7-f3bf-588f-eafe-c84fe4c921ce\",\"6ab84f29-b70b-66c1-d8a0-d99c6d93a5cb\",\"ca3ad969-a491-f454-abff-90abd9160996\",\"c0bea17a-4c8c-8df3-b840-89485f19b6d8\",\"5328c2f4-b25f-669d-8c0b-94032a4df631\",\"8c596e18-5205-50f2-a1c0-d4ca039cfd06\",\"499f0bab-750e-dcab-c8a7-363a5e161f7b\",\"9a96b2c5-0d0f-27d8-bf1c-ca18ed03c001\",\"b69e5d1b-cc87-05a1-c7f5-3e0346b3ddbd\",\"a5186843-16e4-a8f6-9dd2-e09161a9688b\",\"ff3907ec-cf73-1bcc-0bcb-bb2e70a8fe38\",\"cf7514de-bf5a-cc07-7ec1-972f6786ad0a\",\"86e53ab3-d20d-eed0-7fd4-23b170ed5e76\",\"8f522fe4-b668-ee48-22ce-e9e89d2961d7\",\"5b5d13a8-4c17-1010-c90d-2469793cc6fd\",\"5afb42a5-5477-06e7-d34a-07d34d845293\",\"fe4ef49f-bfdb-b05c-f908-64b3c2bee9ee\",\"be9b5760-23a8-802e-8bbd-6bf301f03e86\",\"83f83e6e-793a-e5f1-c5c1-77132bd4387b\",\"5f456095-99ff-a629-55af-147414b08344\",\"9b48ea1b-a1ee-26d6-eeef-e4ae0a5db77c\",\"515274ab-e59e-b876-38f3-ae94945bdcad\",\"b1843bff-072c-c315-08df-15faf290ac29\",\"169783fc-0207-b085-8aba-11bb9c7ed749\",\"c8d6fd06-4a1b-8fe0-411d-faac10317ede\",\"aa044ba7-e56f-e050-8a88-9c69a42468b8\",\"4986f990-cc15-c5a5-6fb5-ec44f395356f\",\"047ed320-8949-446c-f2c5-cb4fd8ab8254\",\"6fa179a8-39be-8e17-1373-c5fb1c434d5f\",\"0510c6fb-40c4-8b20-5f1a-066ca3aabeea\",\"6b1045c5-f5cc-979f-9408-c09ce8305fea\",\"46c7bbc8-c7ca-1d96-4661-deff889346e2\",\"d8dd4b25-3773-0431-a9e7-1ad7757e4cb5\",\"4eaad334-bd0f-9eaa-5b1f-1a09dfc4aae7\",\"3f0d7bfa-4a61-d884-63ae-58af2e5fbbb4\",\"fdc2f054-26b8-4f11-0dee-76d46ecd3f5b\",\"9730f4eb-033a-4ccb-53b0-b6ed3ae8d245\",\"407b2c08-b5a1-0eab-ec0a-ae9b53d9bb57\",\"cfe01b50-eb7f-91dc-fb8e-345ee15c499a\",\"20a1d671-98e2-772e-446c-b91f70d46135\",\"8be91e02-161d-1b99-624d-6e8bbf7c1766\",\"e35e1057-c194-48a2-0593-a5834ac70f7a\",\"9e2569dd-284d-2761-c852-7f9397b87d6e\",\"ee0ddf93-5943-df31-3b1f-713a71a6b175\",\"efe88d0c-477a-4702-149f-df1c3119002e\",\"973a7a35-e719-0726-f76e-f802d54c331c\",\"60deb37c-ef14-5a47-55ce-0e26b1337402\",\"dfcc20d2-bb40-ea18-433b-f1cd7b048d3a\",\"e0081b33-0fb5-5cae-aa52-be00d8c3ec36\",\"20738b7e-4d07-5a50-6f54-9fec6fb1aa00\",\"7fdf4f14-5160-8efb-a4d0-efe3aa1ea309\",\"5bda5219-d37b-7775-db1d-5bbdf833ecb1\",\"3441e3ac-5d8d-8f02-b4b2-4e379d912a0e\",\"4199853e-23de-95d4-36ed-1145c379ee7a\",\"57cbe35b-4e01-2c6e-fa16-39b7064c13ac\",\"bb52afcf-45f5-6c21-b262-526fbb8d9407\",\"0e169b26-bc67-141a-c613-653b3602e8b9\",\"2c61c4ee-da7f-35b5-1b5f-e2ea4442d55b\",\"cc6bf238-1fd9-ea78-1059-ea89d68aa4c3\",\"6254542e-f8de-1006-4b97-0ac2a61a9694\",\"b925234f-d63f-8a4e-0d10-bd85deaba68c\",\"75ef1145-54cc-53bf-f2ab-9ee4601495c9\",\"f503920d-18bb-db42-eb63-ee6182452c0e\",\"4e09b1d4-3255-b346-e243-9ff23a37e2f6\",\"d77209e6-dcd6-166c-ff5f-cfb045fbed76\",\"ed8f4464-5c51-526b-4312-291396d785d2\",\"1646cf2b-566a-fa29-d0a8-de1d6a1528d1\",\"9c286e80-4c80-32a7-05c2-1844c2a9b385\",\"bab6332b-40b0-3460-b228-52258782f667\",\"cd7c9a4f-fe06-7064-87df-db8cd843cbfc\",\"82443a28-89ba-7568-f5d4-85c446e5c50d\",\"a8ef10f1-b728-4c0e-b66e-088f2b5ced7a\",\"c9a5e004-985d-dfab-cfbb-72fb183d2cb3\",\"21928616-db89-afe7-19ae-b3288f4b417a\",\"8b80a731-368b-a0c9-2228-1a92a6f4873a\",\"39f4a112-40d2-0357-265a-cb854349b6ee\",\"f1dd9673-425a-2647-2322-fb9e18af337d\",\"ab939f6f-ea14-c986-ef5a-38ced11b243b\",\"fa850699-0c5c-73b8-ab00-5a4377b1efe1\",\"bcee0d44-2cb3-0a0a-8dd6-605703997158\",\"880fdd8b-7819-1d3b-1321-1cc4a5e62f56\",\"69c47f62-4280-466f-1130-f43dc93fa48f\",\"a2d1f776-3dbb-897d-1c9c-bcf3baad1022\",\"3169ef95-bad3-fbdc-77c3-2e0bb44a1cf3\",\"c28ccc11-493c-6fee-31f6-666bb5b77174\",\"8a084486-6340-7fda-250a-14b7e33abbdb\",\"8610f5e4-3f02-41a7-119c-bc6af5cb1a41\",\"4384a45d-9522-9425-76bd-8c89619375de\",\"7f1705ab-09e0-f63f-9594-40b83399e5a3\",\"4ec32994-3db1-01a9-f579-c7e485fc773b\",\"224384f2-115c-a1a7-6316-554cc84c93f3\",\"d7a107f3-7405-0f71-caa8-c42414953874\",\"2476c4aa-ec4f-a27c-91e5-6c865e2c91f7\",\"12c19a6e-2d21-1459-2b8e-8f9bbb15cbc5\",\"678d8c00-43d2-bbf8-0ef9-02035f048a69\",\"c6320c73-67b5-3d56-5342-acf956b39381\",\"0269ddfc-3e91-55e1-9389-c310d7c5e9f5\",\"e8d54510-080f-5043-06b5-b57e0d2ad340\",\"f077b537-015b-ba9d-1582-3752e689e988\",\"5df76445-9ef7-9e9c-dc3b-224812b04a95\",\"f56b0dd7-f3bf-588f-eafe-c84fe4c921ce\",\"6ab84f29-b70b-66c1-d8a0-d99c6d93a5cb\",\"ca3ad969-a491-f454-abff-90abd9160996\",\"c0bea17a-4c8c-8df3-b840-89485f19b6d8\",\"5328c2f4-b25f-669d-8c0b-94032a4df631\",\"8c596e18-5205-50f2-a1c0-d4ca039cfd06\",\"499f0bab-750e-dcab-c8a7-363a5e161f7b\",\"9a96b2c5-0d0f-27d8-bf1c-ca18ed03c001\",\"b69e5d1b-cc87-05a1-c7f5-3e0346b3ddbd\",\"a5186843-16e4-a8f6-9dd2-e09161a9688b\",\"ff3907ec-cf73-1bcc-0bcb-bb2e70a8fe38\",\"cf7514de-bf5a-cc07-7ec1-972f6786ad0a\",\"86e53ab3-d20d-eed0-7fd4-23b170ed5e76\",\"8f522fe4-b668-ee48-22ce-e9e89d2961d7\",\"5b5d13a8-4c17-1010-c90d-2469793cc6fd\",\"5afb42a5-5477-06e7-d34a-07d34d845293\",\"fe4ef49f-bfdb-b05c-f908-64b3c2bee9ee\",\"be9b5760-23a8-802e-8bbd-6bf301f03e86\",\"83f83e6e-793a-e5f1-c5c1-77132bd4387b\",\"5f456095-99ff-a629-55af-147414b08344\",\"9b48ea1b-a1ee-26d6-eeef-e4ae0a5db77c\",\"515274ab-e59e-b876-38f3-ae94945bdcad\",\"b1843bff-072c-c315-08df-15faf290ac29\",\"169783fc-0207-b085-8aba-11bb9c7ed749\",\"c8d6fd06-4a1b-8fe0-411d-faac10317ede\",\"aa044ba7-e56f-e050-8a88-9c69a42468b8\",\"4986f990-cc15-c5a5-6fb5-ec44f395356f\",\"047ed320-8949-446c-f2c5-cb4fd8ab8254\",\"6fa179a8-39be-8e17-1373-c5fb1c434d5f\",\"0510c6fb-40c4-8b20-5f1a-066ca3aabeea\",\"6b1045c5-f5cc-979f-9408-c09ce8305fea\",\"46c7bbc8-c7ca-1d96-4661-deff889346e2\",\"d8dd4b25-3773-0431-a9e7-1ad7757e4cb5\",\"4eaad334-bd0f-9eaa-5b1f-1a09dfc4aae7\",\"3f0d7bfa-4a61-d884-63ae-58af2e5fbbb4\",\"fdc2f054-26b8-4f11-0dee-76d46ecd3f5b\",\"9730f4eb-033a-4ccb-53b0-b6ed3ae8d245\",\"407b2c08-b5a1-0eab-ec0a-ae9b53d9bb57\",\"cfe01b50-eb7f-91dc-fb8e-345ee15c499a\",\"20a1d671-98e2-772e-446c-b91f70d46135\",\"8be91e02-161d-1b99-624d-6e8bbf7c1766\",\"e35e1057-c194-48a2-0593-a5834ac70f7a\",\"9e2569dd-284d-2761-c852-7f9397b87d6e\",\"ee0ddf93-5943-df31-3b1f-713a71a6b175\",\"efe88d0c-477a-4702-149f-df1c3119002e\",\"973a7a35-e719-0726-f76e-f802d54c331c\",\"60deb37c-ef14-5a47-55ce-0e26b1337402\", \"f1ce1f87-19e4-0274-9959-54cfdf90ba37\",\"6eddf6e1-595c-e304-37c9-9417973deb11\",\"379eb9ad-c438-c569-0085-4aeecc5981bc\",\"ec22c00e-99f9-e884-f190-d63f8b0c7e5d\",\"a40b9496-c316-8db6-acf1-a91c58e57a42\",\"8b7e1d92-a1bd-9d9e-25de-7c382e31007b\",\"99cddfdb-d590-10d7-025b-5032bbcbbbdb\",\"91863a6a-393e-9df3-b51d-4f521205fab4\",\"a207ae9a-6088-c9b5-095a-470430489fe2\",\"92f33894-f296-4c51-4ec3-f45e53c7affe\",\"7a82dc6e-daf8-1d0a-ed64-81dbb202044f\",\"3ffaacbd-bb91-8bd7-914d-8d6fb1ea0662\",\"d37488db-5646-9c64-56ca-145666510e0a\",\"a54dbd6f-5cb5-658a-a6ea-7d54917f2acc\",\"8d0c000e-b1e7-d8ca-59b9-b6dad4b1b0d0\",\"361e236a-fdcd-9d2b-4cf3-c1b4b593c6af\",\"1fc05761-8f40-90ff-394c-a434a0fa5744\",\"5018a902-c9d9-2302-248f-2827cae117b6\",\"ac056cd5-3fbf-5c9b-ed16-c42e7826fb0d\",\"a8aa7cdf-6a8a-6afc-335f-926400e993e8\",\"83b5420d-b68e-a736-b5f1-904cae4f7ad4\",\"832d23d1-a32f-6bd6-847d-825307d4fce5\",\"00468466-aad2-ce49-dc19-4542fcf7cc2f\",\"928f9454-2048-e474-1b6e-36044b38e93a\",\"f2a0fff2-c30e-42c1-dc41-d388ffeecc03\",\"a30aaae0-3b2c-cfcb-5e99-2789b946f2ca\",\"8f22e429-f81c-2388-1fd6-ece9a30dec5e\",\"5be65d31-fc1f-ab8f-fcf1-6a6f758df54d\",\"711626ca-4a09-f3b9-9e7b-7b10f73641ac\",\"0759f455-5805-a14c-9a06-e0cde17411d1\",\"f89ebb06-0278-55e2-c5f6-0215d34c708d\",\"3ebfcff4-46b8-19a4-b4d8-18d8137e1e80\",\"2158c84a-907f-f410-71dc-8ed069574d84\",\"6d5fe8ac-bb30-b756-a29e-1e35f9246f2f\",\"19fc3372-7c77-026f-f083-149493bd9b30\",\"472996aa-a0a5-3822-86f0-012bc80e4553\",\"e54a575b-525b-c7c0-49f1-40074bf25626\",\"a4caee80-467d-903f-b77c-9efbea26b1e4\",\"6dc408df-e44b-4f76-974c-fbfcc88e0ab9\",\"bb958df5-b8ac-c5ae-e6e8-cc4eb1ffb1aa\",\"844e479c-bce5-96a4-8132-e6258b8d1d53\",\"f0174fe9-b2df-f887-734b-3f461e8110db\",\"87faf848-fef5-9faf-2804-3e35903755f1\",\"e9a62636-a327-efdb-4fa7-8ec41d8d06c9\",\"d34ab5f0-4ad2-2dde-0639-547c1ef79238\",\"550cfcfe-22d0-7661-548c-470544e12ffa\",\"00bb6faf-c1fa-db8f-a65d-fbff0a58933e\",\"1041f626-cd86-93ec-495c-1fef70a5e616\",\"2128eaab-d99b-58b7-9b2e-9e0271e54c4c\",\"c2eccb8c-63de-af3c-8eae-05a3e1b60d91\",\"6a5b4387-fb45-9119-8bb6-24c8392ae032\",\"b849e477-fc37-7cbf-ad02-e47665bbf7d3\",\"afe3bd78-f8c5-0990-bba2-a8dd0d7527ff\",\"60d06eb3-37c3-fd9a-48b8-9b6cdbe4ac16\",\"75027cce-eea7-9fff-1026-805e89a96136\",\"fa42425b-0d7c-7ca7-9e1b-fb9c373d61e1\",\"13eb395c-f44a-254c-4e9f-072e0e458d43\",\"a64b5a44-1d08-0cbc-dcd9-0a999405c297\",\"d015402e-22e1-1c29-6d15-f54300e3effa\",\"6853b1bf-bd52-2eab-2b3e-bde918292728\",\"7c4cae07-632a-6997-5363-6e210bc1826a\",\"018f2882-cde0-9992-1e7d-f90db4200d30\",\"f625b9ab-78ab-667c-a8e6-8134f8c30fca\",\"8d55c1f4-5539-9d29-d0f7-cb7a8764d1e5\",\"cf12aa1e-575a-5e83-c569-322c2d99add9\",\"24c37ec3-b99f-f632-793a-64c7524848a8\",\"9ed8e459-2e01-ef71-e61f-f75785c82c20\",\"ac40c113-d84b-4d49-49e1-159037a6b956\",\"226de815-3a0b-7276-49bc-15cb30b917aa\",\"b667f34c-f17f-91b9-fec5-6496baa9a8d2\",\"f1901489-a27a-8200-ed31-85ec7ca1f01c\",\"f5720bf4-5016-f792-73fb-1d3f368c9512\",\"40c3e7b0-627f-9b5a-18cd-a57dc2ded40e\",\"5e38acd8-1192-189b-4d08-d0c1874b6845\",\"6934349e-df59-51e4-9fb1-3b441d065ccb\",\"f190a2ad-fac2-8c21-fc27-529b01b9bb4d\",\"2f8ac00d-f9f8-8a5c-81ef-4bbe17e262c8\",\"b1f7fa6b-2c1b-81d7-ad53-bb291106c899\",\"147a4c89-c6eb-f6c3-6250-f81ed786e436\",\"73522284-b007-77a7-2d4b-926e8ef90626\",\"ed67d513-e968-bb93-4686-a4843ca43d13\",\"7a15f0bf-e32a-9099-dd43-c942e8e678d4\",\"df58b588-1e5e-8153-42fc-054ecb95017d\",\"6524128c-3e34-b9d1-7b32-150f53d79fd2\",\"efab0499-f2f0-863c-c4b1-f472224721f5\",\"0192fdeb-06b3-154e-594c-d1c50936d19b\",\"e135f31d-06d6-7698-e95b-03e23b6df3bd\",\"88573a93-dde6-889f-0e4d-9198e46aabdd\",\"fae51043-fb84-55ea-a66b-f7ce8ec5ba7e\",\"bcd838ee-4c61-923d-3d8c-e9d9aedebcb6\",\"9f532564-99b3-84cf-ac1d-c222f00db1e0\",\"d2c0ae0b-12ed-2b09-4d80-800ba490e99b\",\"1f7c8b3f-8309-91cc-b9d2-363bb6fbcfc7\",\"e129bcb8-09b8-6c55-f72e-d2e04f51d985\",\"503c9d69-2ee8-8152-743a-8af7e9835ecd\",\"2a572747-b79f-fdbb-7db8-744c8b37d375\",\"2273e3e5-ef2c-4627-500d-e1483a368b8d\",\"f3206bfa-0ae2-8ff9-4c07-57dc07548693\",\"6e002922-816e-ba35-8751-19aeabf00863\",\"b07b05ba-3429-8ce5-d4ff-343572fae86a\", \"e416e6cc-68ac-bd3b-0662-e9b9356bbb10\",\"8be60493-7bc3-3e27-79c3-9560c1fda62e\",\"017b3b17-b224-4144-409b-bb66b34f05f2\",\"b2fe2b68-15df-5ea2-4b2c-7bcd9a5714ac\",\"a7fe0d88-526b-3224-1721-71e1fcd490d0\",\"f376f7eb-467b-c303-7972-287f878233e9\",\"2bf6275f-752d-931a-c819-ea5bb9963466\",\"df3ac4df-8646-d618-a3f5-4306490da6e5\",\"45b2622e-80ff-faf8-2d2a-ab863c05dab5\",\"0f9c2cb6-687b-5846-aa49-1f250e928e0a\",\"4530120b-f0a2-3166-de42-8061dee80a49\",\"ebb4ad43-f6a5-63e4-e54f-ebfe9a0d0514\",\"5500fb78-95c2-a46a-a481-8ae5e2671454\",\"76050559-964a-7dcc-47f7-2a8edff6e283\",\"056e17cd-02b6-faa9-d12a-1b26cd19dcf0\",\"cbf80d33-cd36-058e-2bcb-39f06ee8533e\",\"31b76f81-2038-a480-a82f-d44a1d05b609\",\"6543146e-0b71-99c1-d70c-c360f42ce864\",\"82207734-ad84-b36d-d2a1-196e5edb8494\",\"4cc3fb6f-bc0c-5662-b7b2-bdea703985d6\",\"66dad69a-c390-56ed-ca20-6a590ed1e1e7\",\"1a24eda9-4e2d-a818-8c16-8b1508335bd4\",\"dc1894e7-252e-67cf-b90e-bfa192b47570\",\"eb93d47e-2b96-fe2a-f1a0-086b329674b2\",\"690c9353-c901-cfb3-69b6-c1654e36197f\",\"c20f6df0-86d5-fbf8-dc66-bd95e5d1009d\",\"16ea46bb-b6a6-cc04-2845-c7fda81e261c\",\"08be46fc-cca2-1fd5-a668-dc84688ede8e\",\"7f0df2b1-6269-4ae1-063f-b1adc493449c\",\"825a052b-bca3-bf8d-593e-a18aa8fb6db4\",\"60114800-d737-68bf-e7d0-6d69dd4c1376\",\"f8aeb671-d9d4-aedd-7479-db1ba5371515\",\"753256f1-bbbb-689c-d8fc-f749d2cee11c\",\"2e05027b-ebee-f917-4f8d-320ec01abe57\",\"b2388d98-55db-5452-40d0-007c75fe67f6\",\"373fa493-dc5d-302f-e680-76f5d1ac95bd\",\"37c3b3c5-3220-0172-c16b-6303529ff7b1\",\"196ceabf-94ff-aff2-2b5f-9335df7df956\",\"b7dd646a-bbd1-1491-f4cc-49f9d55007e3\",\"e3f5139e-8c73-a22b-7e86-5f2fb3cfa1b8\",\"a9525e8c-08f6-8f12-e21b-f4769aaf1e1b\",\"10e1069c-8fb2-47a4-9c01-11349a8ad792\",\"6f7cbb80-33f5-a11c-dc19-908e9e07dd0a\",\"4877c437-da0b-1e6a-4843-57593eee5c2b\",\"c2150a0e-c4c6-e77c-d866-6187507c2e2c\",\"3d5f6ec2-7d4e-2f25-3d5f-d02ec136e7b3\",\"9283c117-1caf-4a69-5465-0b3d0c8485a1\",\"ebd56734-0681-f53e-2029-af76cc7f0060\",\"08912e21-526e-436f-6e80-9fb43642552a\",\"1d3a5d7b-8692-072f-b137-9702baec5bb5\",\"2ee51faa-f617-63af-e956-60be3b8a80a7\",\"2209ade2-8848-e635-4e58-44455ab589b4\",\"cbf3424c-82de-51d9-1422-68f7bdfd2f87\",\"56828210-9190-c855-46f9-98e7eea954a4\",\"d119d954-b4c9-94a3-5188-a9b8dae9b0b0\",\"b8defdb8-43df-b99c-7604-1d61650da30f\",\"df85decd-50e2-b825-6d09-5771286e12c4\",\"095580e5-5ad2-50c6-5315-c2123c2308e0\",\"4c659cd5-0720-4d3e-20c0-d6263d182dac\",\"eba6205f-ad9f-0380-563e-8ba0e7cf1f82\",\"7227d14d-eb1a-7d93-c9db-367dd6b19dc2\",\"0166c5c6-21f0-65fc-3be5-2f366585977d\",\"603132c8-23c6-a26c-e002-d986aaa01222\",\"4894a609-1051-50e1-80cd-f63f2f221f5c\",\"8506f8b3-a37f-28b6-d575-35e91cf7ed51\",\"232d9f32-3f96-65c2-70f5-9277e37a9969\",\"8952d611-d8c5-ad12-ad8b-431c35f3a1cd\",\"fe6d313b-c775-ce4e-d21a-f3b6584e66f2\",\"f2e42501-bae1-1d71-5d49-6b381ded5fda\",\"e28ccfd4-2ca4-8d60-47b5-2f99cfdf03c2\",\"22c7a970-7aad-e536-ec70-cb56d10c28ca\",\"cf7b29f2-ca50-6086-f918-5a3646dd9de2\",\"7f07fa60-9743-4118-929e-5264f4e70ded\",\"aaf0b867-4943-0b73-5ed4-14957ac55740\",\"a5cd2291-60ec-f334-01a1-f67c61c686e4\",\"25c0b4de-6769-ac2d-3d2a-73d4a2123f25\",\"1c283700-65da-5763-9fac-08b368eecded\",\"6007c069-f4d1-b8c6-57cb-6ea13730369c\",\"de6bdf75-9060-f26e-8af8-fe2b9e3eda79\",\"b91b188a-9b31-8a14-0d12-98cc00f69178\",\"f2bbafe2-a695-6416-9c07-b9e51ba2e1d6\",\"c7243284-de5d-1e29-2b16-1f8981a2ab32\",\"e256eb95-10da-15de-34d8-2af204eb2f3e\",\"7ac1cc6d-1c9d-2271-f4dc-0ceb5bd98577\",\"3cc7e34d-b89a-0f9d-bc4e-52cdde8973a0\",\"c7f10ea5-4c28-8a86-22ec-601b4236060f\",\"a7c0e337-2530-bc3d-b285-0b2649c67e70\",\"ef383fb6-c585-4307-bdd6-4792098b1595\",\"fe2ae25d-0e5f-6108-4e50-0b626df8bb6c\",\"b6d212f5-2cc9-c8ef-2f95-cee96ea47183\",\"140f6ff3-75ea-1091-9705-973f951612e5\",\"6e794910-d0bb-f14a-2b7f-090b0c9d9423\",\"164d6bb3-3ca6-e6ce-b1eb-7dc4ff536462\",\"81b80ba3-8301-dc2d-9646-9a57ca887a6e\",\"2cd43059-6dce-61b3-295a-4109f4a6808a\",\"41b2e76b-ff08-cabc-3678-ad1f2d6f529f\",\"b8a97318-822d-73aa-4f21-f8932767ff53\",\"cddb55e8-ed9e-ebf4-952c-6ae005c21089\",\"1102c5fb-d1ae-2d62-9bc0-b419523b2a55\",\"fc546a1b-5462-aa44-63ea-d9b69c1a536c\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST}}:8082/desafio/produto/cliente/4",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"produto",
+						"cliente",
+						"4"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "100",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authorization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "243f3e06-3ce2-4c59-8ec3-47f28235d3c6",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"console.log(jsonData.access_token);\r",
+							"\r",
+							"postman.setEnvironmentVariable('ACCESS_TOKEN', jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "cliente",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "darbem",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8082/desafio/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"desafio",
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Produtos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://challenge-api.luizalabs.com/api/product/?page=50",
+					"protocol": "http",
+					"host": [
+						"challenge-api",
+						"luizalabs",
+						"com"
+					],
+					"path": [
+						"api",
+						"product",
+						""
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "1001",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Produto By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Charset",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://challenge-api.luizalabs.com/api/product/1bf0f365-fbdd-4e21-9786-da459d78dd1f/",
+					"protocol": "http",
+					"host": [
+						"challenge-api",
+						"luizalabs",
+						"com"
+					],
+					"path": [
+						"api",
+						"product",
+						"1bf0f365-fbdd-4e21-9786-da459d78dd1f",
+						""
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "100",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

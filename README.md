@@ -32,14 +32,6 @@ Conheço os conceitos e fiz um curso na minha antiga empresa, porém já não le
 	2. [Instalando Docker na imagens criada pelo Vagrant](https://docs.docker.com/engine/install/debian/)
 	3. [Montando Imagem](https://dzone.com/articles/all-about-hibernate-manytomany-association)
 
-
-# Aplicação
-
-Acessar a documentação em swagger do serviço:
-
-		http://{ip}:{port}/desafio/swagger-ui.htm
-
-
 # Executar aplicação
 
 	- Se não estiver uma maquina linux:
@@ -52,11 +44,43 @@ Acessar a documentação em swagger do serviço:
 		1. Instalar o [docker](https://docs.docker.com/engine/install/debian/)
 		2. Instalar o docker-compose -> https://docs.docker.com/compose/install/
 	
-	- Criando o ambiente
-		1. Rodar o comando abaixo para criar a imagem
-			1.1 docker build -f Dockerfile -t img-desafio .
-			1.2 docker-compose up --remove-orphans
+	- Criando o ambiente em docker com docker-compose
+		1. Entra na pasta ..\luizalabs-desafio\config
+		2. Rodar o comando abaixo para criar a imagem
+			2.1 docker build -f Dockerfile -t img-desafio .
+			2.2 docker-compose up --remove-orphans
 	
+	- Caso não queria criar em docker basta criar:
+		1. Servidor Redis
+		2. Servidor MySql	
+			2.1 Criar o banco de dado
+			2.2 Executar os script DDL e DML
+		3. Alterar os paramentros abaixo para apontar para o servidor de vocês.
+		
+		`java -jar desafio.jar -Dspring.profiles.active=prod -Dtoken.seconds.access=120 -Dtoken.seconds.refresh=240 -Dmysql.host=192.168.15.144 -Dmysql.port=3306 -Dmysql.database=desafioluizalabs -Dspring.datasource.username=desafio -Dspring.datasource.password=desafio -Dspring.redis.host=192.168.15.144 -Dspring.redis.port=6379`
+	
+# Aplicação
+
+## Autenticação da aplicação
+
+	A autenticação deve ser feita na URL abaixo:
+	
+		* http://{ip}:{porta}/desafio/oauth/token
+	
+	`curl --location --request POST 'http://{{ULR}}/desafio/oauth/token' \`
+	`--header 'Authorization: Basic Y2xpZW50ZToxMjM=' \`
+	`--form 'grant_type=password' \`
+	`--form 'username=darbem' \`
+	`--form 'password=123'`
+
+## Acesso 
+
+	Acessar a documentação em swagger do serviço:
+
+		* http://{ip}:{porta}/desafio/swagger-ui.htm
+
+	O json do postman pode ser acessado na pasta:
+		..\luizalabs-desafio\config\desafioluizalabs.postman_collection.json
 	
 	
 	

@@ -2,7 +2,7 @@ version: '3.5'
 services:
 
     mysql-container:
-        image: mysql:5.7
+        image: mysql/mysql-server:latest
         container_name: mysql-desafio
         ports:
             - "3306:3036"
@@ -27,7 +27,7 @@ services:
             - desafio-network
     
     app-desafio-container:
-        image: img-desafio:latest
+        image: img-desafio
         container_name: app-desafio
         ports:
             - "8082:8082"
